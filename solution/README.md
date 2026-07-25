@@ -49,6 +49,16 @@ uvicorn app:app --port 8000
 
 Demo users (password `demo123`): `dr.chen` (clinician) · `res.kim` (researcher) · `admin`.
 
+## Tests
+
+```bash
+pytest -q        # from solution/, after etl.py has built the databases
+```
+
+25 tests lock in the guarantees: data integrity, the three privacy tiers, CSV
+redaction, k-anonymity + differencing safety, synonym expansion, Safe Harbor
+scrubbing, access control, and malformed-input robustness.
+
 ## Why SQLite and not a hosted MySQL?
 
 Zero credentials, zero network dependency, ships in Python's stdlib, and FTS5 gives a real
