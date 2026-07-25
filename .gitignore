@@ -1,5 +1,9 @@
-# Databases are per-machine ETL output — never commit patient data, even synthetic
+# Databases are per-machine ETL output — never commit patient data, even synthetic.
+# Covers the SQLite file AND its WAL/SHM sidecars (which hold uncheckpointed data pages).
 solution/*.db
+solution/*.db-wal
+solution/*.db-shm
 __pycache__/
 *.pyc
+.pytest_cache/
 venv/
