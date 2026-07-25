@@ -11,7 +11,9 @@
   header { background:var(--navy); color:#fff; padding:14px 24px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
   header h1 { font-size:18px; margin:0; }
   header .sub { font-size:12px; opacity:.75; }
-  #who { margin-left:auto; font-size:13px; }
+  #who { margin-left:auto; font-size:13px; display:flex; align-items:center; gap:10px; }
+  #who button { background:transparent; border:1px solid rgba(255,255,255,.5); padding:4px 12px; font-size:12px; }
+  #who button:hover { background:rgba(255,255,255,.15); }
   .rolebadge { padding:2px 10px; border-radius:10px; font-weight:600; font-size:11px; }
   .r-clinician { background:#3d8b40; } .r-researcher { background:#d9822b; } .r-admin { background:#c0392b; }
   main { max-width:1100px; margin:20px auto; padding:0 16px; }
@@ -84,6 +86,7 @@
         <input type="number" id="age_max" placeholder="Age ≤" style="width:80px">
         <select id="hospital"><option value="">All hospitals</option><option>BCH</option><option>MGH</option><option>BWH</option></select>
         <button onclick="run()">Search federation</button>
+        <button class="ghost" id="csvbtn" onclick="exportCsv()" style="display:none">Export CSV</button>
       </div>
       <div id="out"></div>
     </div>
@@ -113,7 +116,8 @@ async function login(){
     const d = await api("/auth/login", {method:"POST", body: JSON.stringify({username:u, password:p})});
     TOKEN = d.access_token; ROLE = d.role;
     document.getElementById("who").innerHTML =
-      `${d.display} &nbsp;<span class="rolebadge r-${d.role}">${d.role.toUpperCase()}</span>`;
+      `${d.display} <span class="rolebadge r-${d.role}">${d.role.toUpperCase()}</span>
+       <button onclick="logout()">Log out</button>`;
     document.getElementById("login").style.display = "none";
     document.getElementById("appui").style.display = "block";
     document.getElementById("tab-audit").style.display = d.role === "admin" ? "inline-block" : "none";
@@ -121,12 +125,36 @@ async function login(){
   } catch(e){ alert("Login failed: " + e.message); }
 }
 
-function setTab(t){
+function logout(){
+  TOKEN = null; ROLE = null;
+  document.getElementById("who").innerHTML = "";
+  document.getElementById("appui").style.display = "none";
+  document.getElementById("login").style.display = "block";
+  document.getElementById("out").innerHTML = "";
+  document.getElementById("p").value = "";
+  setTabState("discover");
+}
+
+function setTabState(t){
   TAB = t;
   for (const x of ["discover","search","audit"])
     document.getElementById("tab-"+x).classList.toggle("active", x===t);
   document.getElementById("filterbar").style.display = t === "audit" ? "none" : "flex";
-  run();
+  document.getElementById("csvbtn").style.display = t === "search" ? "inline-block" : "none";
+}
+
+function setTab(t){ setTabState(t); run(); }
+
+async function exportCsv(){
+  const p = new URLSearchParams(params().slice(1));
+  p.set("format", "csv"); p.set("limit", "1000");
+  try {
+    const r = await fetch(API + "/api/search?" + p.toString(), {headers: {Authorization: "Bearer " + TOKEN}});
+    if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+    const url = URL.createObjectURL(await r.blob());
+    const a = Object.assign(document.createElement("a"), {href: url, download: "dab_export.csv"});
+    a.click(); URL.revokeObjectURL(url);
+  } catch(e){ alert("Export failed: " + e.message); }
 }
 
 function params(){

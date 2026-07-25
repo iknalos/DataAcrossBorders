@@ -11,6 +11,8 @@ request paths ever open it. Researcher responses carry pseudonyms only.
 Run:  uvicorn app:app --port 8000 --reload
 """
 
+import csv
+import io
 import json
 import sqlite3
 from datetime import datetime, timezone
@@ -18,6 +20,7 @@ from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from pydantic import BaseModel
 
 from auth import current_user, issue_token
@@ -67,11 +70,22 @@ def audit(user: dict, endpoint: str, params: dict, result_count: int) -> None:
     conn.close()
 
 
+def display_name(pn: str) -> str:
+    """DICOM PN 'Last^First^Middle' -> 'Last, First Middle' for display.
+    The vault keeps the raw DICOM value; formatting is presentation-only."""
+    parts = [p for p in pn.split("^") if p]
+    return parts[0] if len(parts) <= 1 else f"{parts[0]}, {' '.join(parts[1:])}"
+
+
+def display_date(yyyymmdd: str) -> str:
+    return f"{yyyymmdd[:4]}-{yyyymmdd[4:6]}-{yyyymmdd[6:]}" if len(yyyymmdd) == 8 else yyyymmdd
+
+
 def build_where(q, age_min, age_max, sex, modality, body_part, hospital):
     """Returns (sql_fragment, params). FTS terms are quoted to disable operators."""
     where, params = [], []
     if q:
-        fts = " ".join(f'"{t}"' for t in q.split())
+        fts = " ".join(f'"{t}"' for t in q.replace('"', " ").split())
         where.append(
             "s.study_key IN (SELECT rowid FROM studies_fts WHERE studies_fts MATCH ?)"
         )
@@ -167,11 +181,13 @@ def search(
     modality: str | None = None,
     body_part: str | None = None,
     hospital: str | None = None,
-    limit: int = Query(default=25, le=100),
+    limit: int = Query(default=25, le=1000),
     offset: int = 0,
+    format: str = Query(default="json", pattern="^(json|csv)$"),
 ):
     """Tier 2 — record-level search. PII exposure depends on role:
-    researcher: pseudonym only | clinician: name + birth YEAR | admin: everything."""
+    researcher: pseudonym only | clinician: name + birth YEAR | admin: everything.
+    format=csv streams the same redacted result set as a download."""
     role = user["role"]
     where, params = build_where(q, age_min, age_max, sex, modality, body_part, hospital)
     conn = clinical_db()
@@ -189,7 +205,7 @@ def search(
             "patient": {"pseudonym": r["patient_key"]},
             "age_years": r["age_years"],
             "sex": r["sex"],
-            "study_date": r["study_date"],
+            "study_date": display_date(r["study_date"]),
             "modality": r["modality"],
             "body_part": r["body_part"],
             "diagnosis": r["diagnosis"],
@@ -213,19 +229,38 @@ def search(
                 continue
             if role == "clinician":
                 res["patient"] = {
-                    "name": p["patient_name"],
+                    "name": display_name(p["patient_name"]),
                     "patient_id": p["patient_id"],
                     "birth_year": p["birth_date"][:4],
                 }
             else:  # admin
                 res["patient"] = {
-                    "name": p["patient_name"],
+                    "name": display_name(p["patient_name"]),
                     "patient_id": p["patient_id"],
-                    "birth_date": p["birth_date"],
+                    "birth_date": display_date(p["birth_date"]),
                 }
 
-    audit(user, "/api/search", dict(q=q, age_min=age_min, age_max=age_max, sex=sex, modality=modality,
-                                    body_part=body_part, hospital=hospital, limit=limit, offset=offset), len(results))
+    audit(user, f"/api/search ({format})", dict(q=q, age_min=age_min, age_max=age_max, sex=sex, modality=modality,
+                                                body_part=body_part, hospital=hospital, limit=limit, offset=offset), len(results))
+
+    if format == "csv":
+        # Same redacted rows as the JSON path — export must never widen exposure.
+        pii_cols = {"researcher": ["pseudonym"],
+                    "clinician": ["name", "patient_id", "birth_year"],
+                    "admin": ["name", "patient_id", "birth_date"]}[role]
+        cols = ["hospital", "study_id", *pii_cols, "age_years", "sex",
+                "study_date", "modality", "body_part", "diagnosis"]
+        buf = io.StringIO()
+        writer = csv.DictWriter(buf, fieldnames=cols, extrasaction="ignore")
+        writer.writeheader()
+        for res in results:
+            writer.writerow({**{k: v for k, v in res.items() if k != "patient"}, **res["patient"]})
+        return Response(
+            content=buf.getvalue(),
+            media_type="text/csv",
+            headers={"Content-Disposition": 'attachment; filename="dab_export.csv"'},
+        )
+
     return {"tier": "records", "role": role, "total_matches": total,
             "returned": len(results), "offset": offset, "results": results}
 
