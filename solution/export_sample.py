@@ -21,32 +21,12 @@ clinical.row_factory = sqlite3.Row
 vault = sqlite3.connect(BASE / "vault.db")
 vault.row_factory = sqlite3.Row
 
-picked: dict[int, sqlite3.Row] = {}
-
-# Seed on structured findings so the sample contains BOTH present and ruled-out
-# examples of key findings — this is what makes the negation demo work client-side.
-SEED_FINDINGS = ["Hydrocephalus", "Hemorrhage", "Infarct", "Stenosis", "Aneurysm",
-                 "Mass Effect", "Cardiomegaly", "Growth Restriction", "Edema"]
-for value in SEED_FINDINGS:
-    for status, n in (("present", 3), ("absent", 2)):
-        for r in clinical.execute(
-            "SELECT s.* FROM studies s JOIN finding_tags t ON t.study_key=s.study_key "
-            "WHERE t.value_lc LIKE ? AND t.status=? LIMIT ?", (f"%{value.lower()}%", status, n)):
-            picked[r["study_key"]] = r
-
-# A few records per free-text seed term too (keyword-search variety).
-for term in SEED_TERMS:
-    for r in clinical.execute(
-        "SELECT s.* FROM studies_fts f JOIN studies s ON s.study_key=f.rowid "
-        "WHERE studies_fts MATCH ? LIMIT 2", (f'"{term}"',)):
-        picked[r["study_key"]] = r
-
-# Fill to a balanced ~20 per hospital.
-for hosp in ("BCH", "MGH", "BWH"):
-    have = sum(1 for r in picked.values() if r["hospital"] == hosp)
-    for r in clinical.execute(
-        "SELECT * FROM studies WHERE hospital=? ORDER BY RANDOM() LIMIT ?", (hosp, max(0, 20 - have))):
-        picked[r["study_key"]] = r
+# Export the FULL dataset so the client-side demo shows the real counts (2700),
+# not a sample. It is synthetic data (already public), so bundling it is fine.
+picked: dict[int, sqlite3.Row] = {
+    r["study_key"]: r
+    for r in clinical.execute("SELECT * FROM studies ORDER BY hospital, study_id")
+}
 
 vkeys = {r["patient_key"]: r for r in vault.execute("SELECT * FROM patients")}
 
