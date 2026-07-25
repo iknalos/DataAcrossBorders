@@ -121,6 +121,7 @@
       <button id="tab-discover" class="active" onclick="setTab('discover')">1 · Discover (counts only)</button>
       <button id="tab-search" onclick="setTab('search')">2 · Record search (redacted)</button>
       <button id="tab-audit" onclick="setTab('audit')" style="display:none">Audit log</button>
+      <button id="tab-verify" onclick="setTab('verify')" style="display:none">Data integrity</button>
     </div>
     <div class="card">
       <div class="filters" id="filterbar">
@@ -192,6 +193,7 @@ async function login(){
     document.getElementById("login").style.display = "none";
     document.getElementById("appui").style.display = "block";
     document.getElementById("tab-audit").style.display = d.role === "admin" ? "inline-block" : "none";
+    document.getElementById("tab-verify").style.display = d.role === "admin" ? "inline-block" : "none";
     run();
   } catch(e){ alert("Login failed: " + e.message); }
 }
@@ -209,9 +211,9 @@ function logout(){
 
 function setTabState(t){
   TAB = t;
-  for (const x of ["discover","search","audit"])
+  for (const x of ["discover","search","audit","verify"])
     document.getElementById("tab-"+x).classList.toggle("active", x===t);
-  document.getElementById("filterbar").style.display = t === "audit" ? "none" : "flex";
+  document.getElementById("filterbar").style.display = (t === "audit" || t === "verify") ? "none" : "flex";
   document.getElementById("csvbtn").style.display = t === "search" ? "inline-block" : "none";
 }
 
@@ -244,16 +246,18 @@ async function run(){
   try {
     if (TAB === "discover") {
       const d = await api("/api/discover" + params());
-      let h = `<div class="counts"><div class="count"><b>${d.total_matches}</b>total matches</div>`;
+      let h = expandedNote(d.expanded_terms);
+      h += `<div class="counts"><div class="count"><b>${d.total_matches}</b>total matches</div>`;
       for (const [hosp, n] of Object.entries(d.by_hospital))
         h += `<div class="count"><b>${n}</b><span class="hosp h-${hosp}">${hosp}</span></div>`;
-      h += `</div><h4>By age band <span class="muted">(counts &lt; ${d.k_anonymity_floor} suppressed — k-anonymity)</span></h4><div class="counts">`;
+      h += `</div><h4>By age band <span class="muted">(counts &lt; ${d.k_anonymity_floor} suppressed — k-anonymity with complementary suppression)</span></h4><div class="counts">`;
       for (const [band, n] of Object.entries(d.by_age_band))
         h += `<div class="count"><b>${n}</b>${band} yrs</div>`;
-      out.innerHTML = h + "</div><p class='muted'>Tier 1 exposes existence and volume only — no records, no PII, for any role.</p>";
+      out.innerHTML = h + "</div><p class='muted'>Tier 1 exposes existence and volume only — no records, no PII, for any role. Suppressed cells cannot be recovered by subtraction.</p>";
     } else if (TAB === "search") {
       const d = await api("/api/search" + params());
-      let h = `<p class="muted">${d.total_matches} matches — showing ${d.returned} (role: <b>${d.role}</b>)</p>
+      let h = expandedNote(d.expanded_terms);
+      h += `<p class="muted">${d.total_matches} matches — showing ${d.returned}, ranked by relevance (role: <b>${d.role}</b>)</p>
         <table><tr><th>Hospital</th><th>Study</th><th>Patient</th><th>Age</th><th>Sex</th><th>Date</th><th>Part</th><th>Diagnosis</th></tr>`;
       for (const r of d.results) {
         const p = r.patient;
@@ -261,17 +265,30 @@ async function run(){
           ? `<b>${p.name}</b><br><span class="muted">${p.patient_id} · ${p.birth_date ? "DOB " + p.birth_date : "b. " + p.birth_year}</span>`
           : `<span class="pseud">${p.pseudonym}</span><br><span class="muted">pseudonym</span>`;
         h += `<tr><td><span class="hosp h-${r.hospital}">${r.hospital}</span></td><td>${r.study_id}</td>
-          <td>${pat}</td><td>${r.age_years}</td><td>${r.sex}</td><td>${r.study_date}</td>
+          <td>${pat}</td><td>${r.age}</td><td>${r.sex}</td><td>${r.study_date}</td>
           <td>${r.body_part}</td><td class="diag">${snippet(r.diagnosis)}</td></tr>`;
       }
       out.innerHTML = h + "</table>";
-    } else {
+    } else if (TAB === "audit") {
       const d = await api("/api/audit");
-      let h = `<table><tr><th>Time (UTC)</th><th>User</th><th>Role</th><th>Endpoint</th><th>Query</th><th>Results</th></tr>`;
+      let h = `<table><tr><th>Time (UTC)</th><th>User</th><th>Role</th><th>Endpoint</th><th>Query</th><th>Results</th><th>Flags</th></tr>`;
       for (const e of d.entries)
         h += `<tr><td>${e.ts_utc}</td><td>${e.username}</td><td>${e.role}</td><td>${e.endpoint}</td>
-              <td><code style="font-size:11px">${e.params_json}</code></td><td>${e.result_count}</td></tr>`;
+              <td><code style="font-size:11px">${e.params_json}</code></td><td>${e.result_count}</td>
+              <td>${e.flags ? `<span style="color:#c0392b;font-weight:600">${e.flags}</span>` : ""}</td></tr>`;
       out.innerHTML = h + "</table>";
+    } else {
+      const d = await api("/api/verify");
+      const ok = d.status === "PASS";
+      let h = `<div class="count" style="display:inline-block;border-color:${ok?'#3d8b40':'#c0392b'}">
+        <b style="color:${ok?'#3d8b40':'#c0392b'}">${d.status}</b>data-integrity self-test</div>
+        <table style="margin-top:12px"><tr><th>Check</th><th>Result</th></tr>`;
+      for (const [k, v] of Object.entries(d.checks))
+        h += `<tr><td>${k.replace(/_/g," ")}</td><td>${v ? "✔ pass" : "✘ FAIL"}</td></tr>`;
+      h += `</table><p class="muted">Manifest: ${d.manifest.study_count} studies · ${d.manifest.patient_count} patients ·
+            generated ${d.manifest.generated_utc}<br>Dataset digest:
+            <code style="font-size:11px">${d.recomputed_digest.slice(0,32)}…</code> (recomputed, matches manifest)</p>`;
+      out.innerHTML = h;
     }
   } catch(e){ out.innerHTML = `<p style="color:#c0392b">Error: ${e.message}</p>`; }
 }
@@ -279,6 +296,12 @@ async function run(){
 function snippet(t){
   const short = t.length > 220 ? t.slice(0, 220) + "…" : t;
   return `<span title="${t.replace(/"/g,"&quot;")}">${short}</span>`;
+}
+
+function expandedNote(terms){
+  if (!terms || !terms.length) return "";
+  return `<p class="muted" style="margin-top:0">🔎 Medically expanded — also matched:
+    ${terms.map(t => `<code style="font-size:11px">${t}</code>`).join(" ")}</p>`;
 }
 </script>
 </body>

@@ -3,12 +3,14 @@ Plaintext demo passwords are intentional for the hackathon; swap for a real
 user store + hashing (passlib) before anything resembling production.
 """
 
+import os
 import time
 
 import jwt
 from fastapi import Header, HTTPException
 
-JWT_SECRET = "dab-demo-jwt-secret"
+# Externalized secret (set DAB_JWT_SECRET in production); demo default keeps it runnable.
+JWT_SECRET = os.environ.get("DAB_JWT_SECRET", "dab-demo-jwt-secret")
 TOKEN_TTL_S = 8 * 3600
 
 USERS = {

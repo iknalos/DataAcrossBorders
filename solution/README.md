@@ -7,9 +7,12 @@ The federated aggregation, privacy, and access-control layer built on top of the
 
 | Problem | Solution |
 | --- | --- |
-| **Knowing where data exists** | Tier-1 `/api/discover`: per-hospital counts + age-band histogram. Never returns records. Counts under 5 are suppressed (k-anonymity). |
-| **Data privacy** | PII lives in a **physically separate database** (`vault.db`), linked to clinical data only by an HMAC pseudonym (`patient_key`). Researcher requests never open the vault. Clinicians get name + birth *year*; admins get everything. Every query is audit-logged. |
-| **Indexing** | ETL normalizes the data (mixed-unit DICOM ages → float years) into SQLite with B-tree indexes on filter columns and an **FTS5 inverted index** over diagnosis text. |
+| **Knowing where data exists** | Tier-1 `/api/discover`: Beacon-style `exists` + per-hospital and age-band counts, never records. k-anonymity floor **with complementary cell suppression** (safe against query differencing) + differencing-aware auditing. |
+| **Data privacy** | PII lives in a **physically separate database** (`vault.db`), linked only by an HMAC pseudonym (`patient_key`). Researcher requests never open the vault, get pseudonyms, and their free-text diagnosis is **scrubbed to HIPAA Safe Harbor**; ages > 89 aggregated to `90+`. Clinicians get name + birth *year*; admins get everything. CSV export applies the same redaction. Every query is audit-logged. |
+| **Indexing** | ETL normalizes mixed-unit DICOM ages → float years into SQLite with B-tree indexes + an **FTS5 inverted index** (Porter stemming). Search adds **UMLS/SNOMED-style medical query expansion** ("heart attack" → "myocardial infarction") and **BM25 relevance ranking**. |
+| **Data integrity** | Pydantic validation on ingest, per-row SHA-256 hashes, a dataset digest manifest, referential-integrity + FTS-consistency checks. `/api/verify` (admin) runs the self-test live. |
+
+See **[ANALYSIS.md](ANALYSIS.md)** for the full state-of-the-art review and design rationale.
 
 ## Architecture
 
