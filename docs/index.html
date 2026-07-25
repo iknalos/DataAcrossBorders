@@ -19,6 +19,7 @@
   main { max-width:1100px; margin:20px auto; padding:0 16px; }
   .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px 20px; margin-bottom:16px; }
   .banner { background:#fbeaea; border-left:4px solid #c0392b; padding:10px 14px; border-radius:0 6px 6px 0; margin-bottom:16px; display:none; }
+  .banner.demo { background:#eef4fb; border-left-color:#2874a6; }
   button { background:var(--blue); color:#fff; border:0; border-radius:6px; padding:8px 14px; cursor:pointer; font-size:13px; }
   button.ghost { background:#fff; color:var(--blue); border:1px solid var(--blue); }
   button:hover { filter:brightness(1.1); }
@@ -69,10 +70,10 @@
   <div id="who"></div>
 </header>
 <main>
-  <div class="banner" id="banner">
-    <b>Aggregator not reachable at <span id="apiurl-label"></span>.</b>
-    Start it locally: <code>uvicorn app:app --port 8000</code> in <code>solution/</code>
-    (see the <a href="https://github.com/iknalos/DataAcrossBorders">repo</a>).
+  <div class="banner demo" id="banner">
+    <b>🔒 Demo mode.</b> Running entirely in your browser on a 60-record synthetic sample —
+    no server required, no real patient data. The full system (FastAPI aggregator + physical
+    PII vault) lives in the <a href="https://github.com/iknalos/DataAcrossBorders">repo</a>.
   </div>
 
   <div class="gatewrap" id="gate">
@@ -138,10 +139,29 @@
     </div>
   </div>
 </main>
+<script src="sample_data.js"></script>
+<script src="demo_engine.js"></script>
 <script>
 const API = localStorage.getItem("dab_api") || "http://localhost:8000";
-document.getElementById("apiurl-label").textContent = API;
+let USE_DEMO = true;   // decided by initBackend(): real API if reachable, else in-browser demo
 let TOKEN = null, ROLE = null, TAB = "discover", CHOSEN = null;
+
+// Probe for a live backend once at startup; fall back to the client-side demo engine.
+// ?demo=1 forces demo mode (for a guaranteed-shareable link); ?api=URL points at a backend.
+async function initBackend(){
+  const qs = new URLSearchParams(location.search);
+  if (qs.get("api")) localStorage.setItem("dab_api", qs.get("api"));
+  if (qs.get("demo") === "1") { USE_DEMO = true; document.getElementById("banner").style.display = "block"; return; }
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 1500);
+    const r = await fetch(API + "/health", {signal: ctrl.signal});
+    clearTimeout(t);
+    USE_DEMO = !r.ok;
+  } catch { USE_DEMO = true; }
+  document.getElementById("banner").style.display = USE_DEMO ? "block" : "none";
+}
+initBackend();
 const ROLE_META = {
   clinician:  {title: "Clinician sign-in",     demo: "dr.chen"},
   researcher: {title: "Researcher sign-in",    demo: "res.kim"},
@@ -170,14 +190,24 @@ function fillDemo(){
 }
 
 async function api(path, opts={}){
+  if (USE_DEMO) return demoDispatch(path, opts);
   const headers = Object.assign({"Content-Type":"application/json"}, opts.headers||{});
   if (TOKEN) headers["Authorization"] = "Bearer " + TOKEN;
-  let r;
-  try { r = await fetch(API + path, Object.assign({}, opts, {headers})); }
-  catch(e){ document.getElementById("banner").style.display = "block"; throw e; }
-  document.getElementById("banner").style.display = "none";
+  const r = await fetch(API + path, Object.assign({}, opts, {headers}));
   if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
   return r.json();
+}
+
+// Route API-shaped calls to the in-browser engine (window.DEMO).
+function demoDispatch(path, opts={}){
+  const [base, query=""] = path.split("?");
+  const p = new URLSearchParams(query);
+  if (base === "/auth/login")   return DEMO.login(...(b => [b.username, b.password])(JSON.parse(opts.body)));
+  if (base === "/api/discover") return DEMO.discover(p);
+  if (base === "/api/search")   return DEMO.search(p, p.get("format"));
+  if (base === "/api/audit")    return DEMO.audit();
+  if (base === "/api/verify")   return DEMO.verify();
+  throw new Error("Unknown demo endpoint: " + base);
 }
 
 async function login(){
@@ -223,9 +253,15 @@ async function exportCsv(){
   const p = new URLSearchParams(params().slice(1));
   p.set("format", "csv"); p.set("limit", "1000");
   try {
-    const r = await fetch(API + "/api/search?" + p.toString(), {headers: {Authorization: "Bearer " + TOKEN}});
-    if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
-    const url = URL.createObjectURL(await r.blob());
+    let csv;
+    if (USE_DEMO) {
+      csv = DEMO.search(p, "csv");
+    } else {
+      const r = await fetch(API + "/api/search?" + p.toString(), {headers: {Authorization: "Bearer " + TOKEN}});
+      if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+      csv = await r.text();
+    }
+    const url = URL.createObjectURL(new Blob([csv], {type: "text/csv"}));
     const a = Object.assign(document.createElement("a"), {href: url, download: "dab_export.csv"});
     a.click(); URL.revokeObjectURL(url);
   } catch(e){ alert("Export failed: " + e.message); }
