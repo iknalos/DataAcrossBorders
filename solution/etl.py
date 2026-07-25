@@ -102,6 +102,36 @@ def fetch_all() -> dict[str, list[dict]]:
     return out
 
 
+LABELS_DIR = BASE.parent / "labels"
+LABEL_FILES = {"BCH": "bch_labeled.json", "MGH": "mgh_labeled.json", "BWH": "bwh_labeled.json"}
+VALID_STATUS = {"present", "absent", "uncertain"}
+VALID_DIMENSION = {"location", "finding_type", "size"}
+
+
+def load_labels() -> dict[tuple[str, str], dict]:
+    """Map (hospital, StudyID) -> {GenericCategory, FindingTags} from the offline
+    LLM_output labels. Enrichment only — the node data stays authoritative for the
+    original 12 fields and for integrity."""
+    labels: dict[tuple[str, str], dict] = {}
+    for hospital, fname in LABEL_FILES.items():
+        path = LABELS_DIR / fname
+        if not path.exists():
+            print(f"  NOTE: no label file for {hospital} ({path.name}); studies load without tags.", file=sys.stderr)
+            continue
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            tags = []
+            for t in rec.get("FindingTags", []):
+                dim, val, st = t.get("dimension"), t.get("value"), t.get("status")
+                if dim in VALID_DIMENSION and val and st in VALID_STATUS:
+                    tags.append((dim, val, st))
+            labels[(hospital, rec["StudyID"])] = {
+                "category": rec.get("GenericCategory", ""),
+                "tags": tags,
+            }
+        print(f"  {hospital}: {sum(1 for k in labels if k[0]==hospital)} labeled records loaded")
+    return labels
+
+
 def verify_integrity(clinical: sqlite3.Connection, vault: sqlite3.Connection) -> None:
     """Abort the ETL if any integrity invariant fails."""
     problems = []
@@ -120,17 +150,25 @@ def verify_integrity(clinical: sqlite3.Connection, vault: sqlite3.Connection) ->
     bad = 0
     for r in clinical.execute(
         "SELECT hospital, study_id, study_uid, patient_key, age_years, sex, "
-        "study_date, modality, body_part, diagnosis, row_hash FROM studies"
+        "study_date, modality, body_part, generic_category, diagnosis, row_hash FROM studies"
     ):
-        expect = row_hash(*r[:10])
-        if expect != r[10]:
+        expect = row_hash(*r[:11])
+        if expect != r[11]:
             bad += 1
     if bad:
         problems.append(f"{bad} rows failed hash verification")
 
+    # Every finding tag must point at a real study (referential integrity).
+    tag_orphans = clinical.execute(
+        "SELECT COUNT(*) FROM finding_tags t LEFT JOIN studies s ON s.study_key=t.study_key "
+        "WHERE s.study_key IS NULL").fetchone()[0]
+    if tag_orphans:
+        problems.append(f"{tag_orphans} finding tags reference a missing study")
+
     if problems:
         sys.exit("INTEGRITY CHECK FAILED:\n  - " + "\n  - ".join(problems))
-    print(f"Integrity OK: {n_studies} studies, FTS consistent, no orphans, all hashes valid.")
+    n_tags = clinical.execute("SELECT COUNT(*) FROM finding_tags").fetchone()[0]
+    print(f"Integrity OK: {n_studies} studies, {n_tags} tags, FTS consistent, no orphans, all hashes valid.")
 
 
 def main() -> None:
@@ -139,6 +177,9 @@ def main() -> None:
         data = fetch_all()
     except httpx.ConnectError as e:
         sys.exit(f"ERROR: a hospital node is not reachable ({e}). Start all three nodes first.")
+
+    print("Loading LLM labels (GenericCategory + FindingTags)...")
+    labels = load_labels()
 
     for db in ("clinical.db", "vault.db"):
         for suffix in ("", "-wal", "-shm"):
@@ -149,7 +190,7 @@ def main() -> None:
     clinical.executescript((BASE / "schema_clinical.sql").read_text())
     vault.executescript((BASE / "schema_vault.sql").read_text())
 
-    n_studies = n_patients = n_invalid = 0
+    n_studies = n_patients = n_invalid = n_tags = n_untagged = 0
     all_hashes = []
     for hospital, records in data.items():
         for raw in records:
@@ -168,20 +209,29 @@ def main() -> None:
             )
             n_patients += cur.rowcount
 
+            label = labels.get((hospital, rec.StudyID), {"category": "", "tags": []})
+            category = label["category"]
+            if not label["tags"] and not category:
+                n_untagged += 1
+
             age = age_to_years(rec.PatientAge)
-            h = row_hash(hospital, rec.StudyID, rec.StudyInstanceUID, key, age,
-                         rec.PatientSex, rec.StudyDate, rec.Modality, rec.BodyPartExamined, rec.Diagnosis)
+            h = row_hash(hospital, rec.StudyID, rec.StudyInstanceUID, key, age, rec.PatientSex,
+                         rec.StudyDate, rec.Modality, rec.BodyPartExamined, category, rec.Diagnosis)
             all_hashes.append(h)
             cur = clinical.execute(
                 "INSERT INTO studies (hospital, study_id, study_uid, patient_key, age_years, sex, "
-                "study_date, modality, body_part, diagnosis, row_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "study_date, modality, body_part, generic_category, diagnosis, row_hash) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 (hospital, rec.StudyID, rec.StudyInstanceUID, key, age, rec.PatientSex,
-                 rec.StudyDate, rec.Modality, rec.BodyPartExamined, rec.Diagnosis, h),
+                 rec.StudyDate, rec.Modality, rec.BodyPartExamined, category, rec.Diagnosis, h),
             )
-            clinical.execute(
-                "INSERT INTO studies_fts (rowid, diagnosis) VALUES (?, ?)",
-                (cur.lastrowid, rec.Diagnosis),
-            )
+            study_key = cur.lastrowid
+            clinical.execute("INSERT INTO studies_fts (rowid, diagnosis) VALUES (?, ?)", (study_key, rec.Diagnosis))
+            for dim, val, st in label["tags"]:
+                clinical.execute(
+                    "INSERT INTO finding_tags (study_key, dimension, value, value_lc, status) VALUES (?, ?, ?, ?, ?)",
+                    (study_key, dim, val, val.lower(), st))
+                n_tags += 1
             n_studies += 1
 
     digest = hashlib.sha256("".join(sorted(all_hashes)).encode()).hexdigest()
@@ -200,7 +250,10 @@ def main() -> None:
 
     if n_invalid:
         print(f"WARNING: skipped {n_invalid} invalid record(s).", file=sys.stderr)
+    if n_untagged:
+        print(f"NOTE: {n_untagged} studies had no matching label.", file=sys.stderr)
     print(f"Loaded {n_studies} studies (clinical.db) and {n_patients} patients (vault.db).")
+    print(f"Loaded {n_tags} finding tags.")
     print(f"Dataset digest: {digest[:16]}…")
 
 

@@ -71,7 +71,7 @@
 </header>
 <main>
   <div class="banner demo" id="banner">
-    <b>🔒 Demo mode.</b> Running entirely in your browser on a 60-record synthetic sample —
+    <b>🔒 Demo mode.</b> Running entirely in your browser on a synthetic sample —
     no server required, no real patient data. The full system (FastAPI aggregator + physical
     PII vault) lives in the <a href="https://github.com/iknalos/DataAcrossBorders">repo</a>.
   </div>
@@ -126,7 +126,8 @@
     </div>
     <div class="card">
       <div class="filters" id="filterbar">
-        <input type="text" id="q" placeholder='Free-text over diagnosis, e.g. "hydrocephalus" or "ischemic infarct"'>
+        <input type="text" id="q" placeholder='Free-text over diagnosis, e.g. "ischemic infarct"'>
+        <select id="category"><option value="">Category</option><option>Neuro</option><option>Cardiac</option><option>OB/Fetal</option></select>
         <select id="body_part"><option value="">Body part</option><option>BRAIN</option><option>HEART</option><option>FETAL</option></select>
         <select id="sex"><option value="">Sex</option><option>M</option><option>F</option></select>
         <input type="number" id="age_min" placeholder="Age ≥" style="width:80px">
@@ -134,6 +135,16 @@
         <select id="hospital"><option value="">All hospitals</option><option>BCH</option><option>MGH</option><option>BWH</option></select>
         <button onclick="run()">Search federation</button>
         <button class="ghost" id="csvbtn" onclick="exportCsv()" style="display:none">Export CSV</button>
+      </div>
+      <div class="filters" id="findingbar" style="margin-top:8px">
+        <span class="muted" style="align-self:center">Finding (entity search):</span>
+        <input type="text" id="finding" placeholder='e.g. "hydrocephalus", "hemorrhage", "stenosis"' style="min-width:220px;flex:0 1 260px">
+        <select id="finding_status" title="Status of the finding">
+          <option value="present">present (has it)</option>
+          <option value="absent">absent (ruled out)</option>
+          <option value="any">any (mentioned)</option>
+        </select>
+        <span class="muted small" style="align-self:center">Default excludes reports that rule the finding out.</span>
       </div>
       <div id="out"></div>
     </div>
@@ -243,7 +254,9 @@ function setTabState(t){
   TAB = t;
   for (const x of ["discover","search","audit","verify"])
     document.getElementById("tab-"+x).classList.toggle("active", x===t);
-  document.getElementById("filterbar").style.display = (t === "audit" || t === "verify") ? "none" : "flex";
+  const hideFilters = (t === "audit" || t === "verify");
+  document.getElementById("filterbar").style.display = hideFilters ? "none" : "flex";
+  document.getElementById("findingbar").style.display = hideFilters ? "none" : "flex";
   document.getElementById("csvbtn").style.display = t === "search" ? "inline-block" : "none";
 }
 
@@ -269,10 +282,11 @@ async function exportCsv(){
 
 function params(){
   const p = new URLSearchParams();
-  for (const id of ["q","body_part","sex","age_min","age_max","hospital"]) {
+  for (const id of ["q","category","body_part","sex","age_min","age_max","hospital","finding"]) {
     const v = document.getElementById(id).value.trim();
     if (v) p.set(id, v);
   }
+  if (p.get("finding")) p.set("finding_status", document.getElementById("finding_status").value);
   return p.toString() ? "?" + p.toString() : "";
 }
 
@@ -302,7 +316,8 @@ async function run(){
           : `<span class="pseud">${p.pseudonym}</span><br><span class="muted">pseudonym</span>`;
         h += `<tr><td><span class="hosp h-${r.hospital}">${r.hospital}</span></td><td>${r.study_id}</td>
           <td>${pat}</td><td>${r.age}</td><td>${r.sex}</td><td>${r.study_date}</td>
-          <td>${r.body_part}</td><td class="diag">${snippet(r.diagnosis)}</td></tr>`;
+          <td>${r.body_part}${r.category?`<br><span class="muted small">${r.category}</span>`:""}</td>
+          <td class="diag">${snippet(r.diagnosis)}${findingChips(r.findings)}</td></tr>`;
       }
       out.innerHTML = h + "</table>";
     } else if (TAB === "audit") {
@@ -338,6 +353,16 @@ function expandedNote(terms){
   if (!terms || !terms.length) return "";
   return `<p class="muted" style="margin-top:0">🔎 Medically expanded — also matched:
     ${terms.map(t => `<code style="font-size:11px">${t}</code>`).join(" ")}</p>`;
+}
+
+function findingChips(findings){
+  if (!findings || !findings.length) return "";
+  const ft = findings.filter(t => t.dimension === "finding_type");
+  if (!ft.length) return "";
+  const color = {present:"#1e8449", absent:"#c0392b", uncertain:"#d9822b"};
+  const chips = ft.map(t => `<span style="display:inline-block;margin:2px 3px 0 0;padding:1px 7px;border-radius:9px;
+    font-size:10px;background:${color[t.status]||'#7d8a96'};color:#fff">${t.value}${t.status!=="present"?" ("+t.status+")":""}</span>`).join("");
+  return `<div style="margin-top:4px">${chips}</div>`;
 }
 </script>
 </body>

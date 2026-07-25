@@ -2,6 +2,90 @@
 window.DAB_SAMPLE = [
 {
 "hospital": "BCH",
+"study_id": "BR-1099",
+"patient_key": "d6f2617cd3541373",
+"patient_name": "Ivanov^Dmitry",
+"patient_id": "CHB-55102",
+"birth_date": "20120707",
+"age_years": 13.0,
+"sex": "M",
+"study_date": "20260415",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Midline Shift",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Midline",
+"status": "absent"
+},
+{
+"dimension": "size",
+"value": "3.0 x 2.5 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Significant",
+"status": "absent"
+}
+],
+"diagnosis": "Multiplanar brain MRI demonstrates a well-defined extra-axial fluid collection in the left middle cranial fossa, measuring approximately 4.5 x 3.0 x 2.5 cm. The collection is homogeneous and follows CSF signal on all sequences (T1, T2, FLAIR, DWI). There is mild remodeling of the adjacent sphenoid wing and temporal bone, but no significant mass effect or midline shift.\n\nImpression: Large, benign-appearing left temporal arachnoid cyst (Galassi Type II) with minimal adjacent mass effect and no evidence of hemorrhage or rupture."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-1105",
+"patient_key": "34d07734a00c33bb",
+"patient_name": "Smith^Benjamin",
+"patient_id": "CHB-41920",
+"birth_date": "20200105",
+"age_years": 6.0,
+"sex": "M",
+"study_date": "20260312",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Brainstem",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "absent"
+}
+],
+"diagnosis": "MR imaging of the brain demonstrates normal myelination patterns for the patient's age. The ventricular system, extra-axial spaces, and basal cisterns are unremarkable. There is no evidence of intracranial mass, focal signal abnormality, hemorrhage, or restriction of diffusion. Structural development of the corpus callosum and brainstem is normal.\n\nImpression: Normal pediatric brain MRI. No structural, myelination, or metabolic abnormality detected to account for global developmental delay."
+},
+{
+"hospital": "BCH",
 "study_id": "BR-1543",
 "patient_key": "163f8ddf6ecae09e",
 "patient_name": "Smith^BabyBoy",
@@ -12,7 +96,107 @@ window.DAB_SAMPLE = [
 "study_date": "20260215",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Intracranial Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Basal Ganglia",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Internal Capsule",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Temporal Lobe",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+}
+],
 "diagnosis": "Neonatal brain MRI reveals a large area of restricted diffusion and T2 prolongation involving the left middle cerebral artery territory, particularly the basal ganglia, posterior limb of the internal capsule, and temporal lobe. Accompanying focal mass effect causes compression of the left lateral ventricle. No intracranial hemorrhage or extra-axial collections are seen.\n\nImpression: Acute left MCA territory ischemic infarct with secondary edema. Follow-up imaging and pediatric neurology consultation are indicated."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-1845",
+"patient_key": "27e73b5c4bf7865b",
+"patient_name": "Ivanov^Dmitry",
+"patient_id": "CHB-88220",
+"birth_date": "20101111",
+"age_years": 15.0,
+"sex": "M",
+"study_date": "20260310",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Parietal Lobe",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Small",
+"status": "present"
+}
+],
+"diagnosis": "MR venogram and conventional brain MRI demonstrate absence of the expected flow void in the superior sagittal sinus and left transverse sinus, compatible with dural venous sinus thrombosis. On T2-weighted and DWI sequences, there is a small area of cortical edema and petechial hemorrhage in the left parietal lobe, representing a localized venous congestion/infarct.\n\nImpression: Extensive dural venous sinus thrombosis involving the superior sagittal and left transverse sinuses, with an associated small left parietal venous hemorrhagic infarct."
 },
 {
 "hospital": "BCH",
@@ -26,21 +210,52 @@ window.DAB_SAMPLE = [
 "study_date": "20251212",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Atrophy",
+"status": "absent"
+}
+],
 "diagnosis": "MRI of the brain was requested to evaluate the etiology of recent-onset atypical absence seizures. High-resolution multiplanar sequences show symmetric myelination and normal cerebral cortical gyral patterns. Ventricles are normal in caliber and symmetry. No hippocampal atrophy or signal abnormalities are detected in the mesial temporal structures. Major intracranial arteries show patent flow voids.\n\nImpression: Structurally unremarkable brain MRI. There are no cortical developmental malformations, space-occupying pathology, or focal parenchymal signal abnormalities found to explain the clinical seizure activity."
 },
 {
 "hospital": "BCH",
-"study_id": "BR-2180",
-"patient_key": "804790eab9923302",
-"patient_name": "Olsen^Erik",
-"patient_id": "CHB-88321",
-"birth_date": "20120228",
-"age_years": 13.0,
-"sex": "M",
-"study_date": "20250815",
+"study_id": "BR-2190",
+"patient_key": "1bc8aec79a8c9c09",
+"patient_name": "Taylor^Imogen",
+"patient_id": "CHB-11902",
+"birth_date": "20061109",
+"age_years": 19.0,
+"sex": "F",
+"study_date": "20260404",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "Diagnostic MR imaging of the brain was conducted to rule out a central cause for cyclic vomiting syndrome. Multisequence, contrast-enhanced images reveal unremarkable cerebral, cerebellar, and brainstem structures. There is no tumor or mass localized within the fourth ventricle or area postrema. Ventricular architecture and CSF pathways are fully patent without evidence of restriction or pressure changes.\n\nImpression: Structurally normal brain MRI. No central mass lesion, obstructive pathology, or intracranial abnormality found to explain the patient's recurrent episodes of cyclic vomiting."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "1.2 x 1.1 cm",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI demonstrates a well-circumscribed lesion in the left frontoparietal subcortical white matter measuring 1.2 x 1.1 cm. The lesion shows a characteristic 'popcorn-like' appearance, with a reticulated central core of mixed signal intensity on T1- and T2-weighted images, surrounded by a prominent rim of hypointensity representing hemosiderin deposition. There is no associated edema or mass effect.\n\nImpression: Classic appearance of a cerebral cavernous malformation (cavernoma) in the left frontoparietal lobe. No evidence of acute hemorrhage or surrounding edema is present."
 },
 {
 "hospital": "BCH",
@@ -54,6 +269,39 @@ window.DAB_SAMPLE = [
 "study_date": "20260228",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Cortical Tubers",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Subependymal Nodules",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Bilateral",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Parietal Lobe",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "absent"
+}
+],
 "diagnosis": "Brain MRI shows multiple subependymal nodules lining the lateral ventricles, some of which demonstrate signal drop-out on susceptibility-weighted imaging, indicating calcification. Additionally, cortical and subcortical tubers are visible in the bilateral frontal and parietal lobes. No large mass at the foramen of Monro is visualized.\n\nImpression: Intracranial findings are highly consistent with Tuberous Sclerosis Complex. No evidence of a subependymal giant cell astrocytoma (SEGA) or acute obstructive hydrocephalus at this time."
 },
 {
@@ -68,7 +316,183 @@ window.DAB_SAMPLE = [
 "study_date": "20251212",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "location",
+"value": "Temporal Lobe",
+"status": "present"
+}
+],
 "diagnosis": "MRI of the brain using high-resolution epilepsy sequences demonstrates symmetric hippocampal volumes and signal intensities. The temporal lobes are structurally normal, with no evidence of mesial temporal sclerosis or cortical developmental malformations. The remaining cerebral lobes, ventricles, and extra-axial spaces are normal. The major intracranial arterial flow voids are intact.\n\nImpression: Unremarkable high-resolution brain MRI. No structural etiology or epileptogenic focus identified to correlate with the patient's recent onset of absence seizures."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-3002",
+"patient_key": "e8d4286437d7f565",
+"patient_name": "Jenkins^Ethan",
+"patient_id": "CHB-81002",
+"birth_date": "20200818",
+"age_years": 5.0,
+"sex": "M",
+"study_date": "20260114",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "1.2 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "2.8 x 2.4 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "Multiplanar multisequence brain MRI reveals a well-circumscribed cystic lesion containing an intensely enhancing mural nodule in the right cerebellar hemisphere. The cystic portion measures 2.8 x 2.4 cm, and the mural nodule measures 1.2 cm. There is mild surrounding vasogenic edema and local compression of the fourth ventricle, though no upstream ventricular dilation is visualized on current sequences.\n\nImpression: Right cerebellar cystic and solid enhancing lesion, highly suggestive of a juvenile pilocytic astrocytoma. Neurosurgical consultation is recommended."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-3281",
+"patient_key": "2dee482d73edf4a0",
+"patient_name": "Smith^Tyler",
+"patient_id": "CHB-60293",
+"birth_date": "20080512",
+"age_years": 17.0,
+"sex": "M",
+"study_date": "20260514",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "present"
+}
+],
+"diagnosis": "MR imaging of the brain was performed following a sports-related concussion. The scan shows no intracranial extra-axial fluid collections, cerebral contusions, or microhemorrhages on susceptibility-weighted imaging (SWI). The ventricular system is normal, and there is no evidence of structural parenchymal injury.\n\nImpression: Unremarkable brain MRI. No structural correlate or traumatic injury is identified to explain persistent post-concussive symptoms."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-3329",
+"patient_key": "6469c668d3a546f3",
+"patient_name": "Jensen^Freja",
+"patient_id": "CHB-11204",
+"birth_date": "20250215",
+"age_years": 0.5,
+"sex": "F",
+"study_date": "20250815",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hydrocephalus",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Marked",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI shows a markedly enlarged posterior fossa with a cystic fluid collection communicating directly with an expanded fourth ventricle, associated with hypoplasia of the cerebellar vermis and an elevated tentorium. There is prominent enlargement of the third and lateral ventricles, indicating progressive hydrocephalus.\n\nImpression: Classic Dandy-Walker malformation with associated obstructive ventriculomegaly. Neurosurgical evaluation for shunt or fenestration is advised."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-3401",
+"patient_key": "57bb96aabf8373be",
+"patient_name": "Patel^Aarav",
+"patient_id": "CHB-12501",
+"birth_date": "20130514",
+"age_years": 12.0,
+"sex": "M",
+"study_date": "20250312",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Hydrocephalus",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "2.4 x 2.6 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+}
+],
+"diagnosis": "MR imaging of the brain with and without contrast reveals a well-circumscribed cyst with a highly enhancing mural nodule located within the right cerebellar hemisphere. The lesion measures approximately 2.8 x 2.4 x 2.6 cm. There is associated moderate local mass effect on the fourth ventricle, although the ventricular system shows no current signs of active obstructive hydrocephalus. Surrounding vasogenic edema is minimal.\n\nImpression: Cystic cerebellar lesion with an enhancing mural nodule, highly characteristic of a juvenile pilocytic astrocytoma. Recommend pediatric neurosurgical consultation for elective resection."
 },
 {
 "hospital": "BCH",
@@ -82,49 +506,126 @@ window.DAB_SAMPLE = [
 "study_date": "20260318",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hydrocephalus",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "7.5 mm",
+"status": "present"
+}
+],
 "diagnosis": "Cerebellar tonsils are herniated approximately 7.5 mm below the level of the foramen magnum. The third, fourth, and lateral ventricles are normal in size and configuration, with no evidence of hydrocephalus. The cervical spine was partially visualized and shows no evidence of syringomyelia on sagittal T2-weighted sequences.\n\nImpression: Chiari I malformation without associated ventriculomegaly or cervical syrinx."
 },
 {
 "hospital": "BCH",
-"study_id": "BR-5009",
-"patient_key": "22228f0b86edcb98",
-"patient_name": "Jensen^Frederik",
-"patient_id": "CHB-33441",
-"birth_date": "20120115",
+"study_id": "BR-4410",
+"patient_key": "ff905624425111fd",
+"patient_name": "Kowalski^Mateusz",
+"patient_id": "CHB-31294",
+"birth_date": "20100418",
+"age_years": 15.0,
+"sex": "M",
+"study_date": "20250918",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Brainstem",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "present"
+}
+],
+"diagnosis": "MRI of the brain was completed for evaluation of atypical, non-focal syncope episodes. Brain parenchyma shows no signal abnormalities, mass lesions, or acute infarction on diffusion-weighted imaging (DWI). The corpus callosum and brainstem are structurally intact and unremarkable. Intracranial vascular flow voids at the base of the skull appear patent and symmetric.\n\nImpression: Normal MR study of the brain. No structural, neoplastic, or vascular abnormalities are identified."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-5027",
+"patient_key": "a01ee09618e027a5",
+"patient_name": "Dubois^Chloe",
+"patient_id": "CHB-38491",
+"birth_date": "20120718",
 "age_years": 13.0,
-"sex": "M",
-"study_date": "20250815",
+"sex": "F",
+"study_date": "20251130",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "Brain MRI demonstrates normal intracranial architecture. There is no evidence of intra-axial or extra-axial pathology, mass lesion, or abnormal enhancement. The ventricles and cortical sulci are unremarkable. Evaluation of the skull and superficial tissues shows a small subcutaneous fluid-containing cyst of the posterior scalp without any intracranial communication.\n\nImpression: Normal brain MRI. Benign subcutaneous scalp cyst without intracranial extension."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "absent"
+}
+],
+"diagnosis": "Brain MR evaluation shows normal cortical thickness, normal ventricular morphology, and absence of intra- or extra-axial mass lesions. The deep white matter is free of demyelinating or gliotic changes. No vascular abnormalities, aneurysms, or flow restrictions are visualized. Visualized paranasal sinuses are clear.\n\nImpression: Unremarkable MRI of the brain. No organic etiology identified for the patient's complaints of episodic migraines with aura."
 },
 {
 "hospital": "BCH",
-"study_id": "BR-5015",
-"patient_key": "6574cffd43a8cf89",
-"patient_name": "Chowdhury^Aarav",
-"patient_id": "CHB-91402",
-"birth_date": "20220630",
-"age_years": 3.0,
-"sex": "M",
-"study_date": "20251005",
+"study_id": "BR-6124",
+"patient_key": "03490629bf28fb7b",
+"patient_name": "Kim^Ji-Young",
+"patient_id": "CHB-51032",
+"birth_date": "20110822",
+"age_years": 14.0,
+"sex": "F",
+"study_date": "20250314",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "MR imaging of the brain was completed under anesthesia using dedicated pediatric protocols. The cerebral hemispheres demonstrate normal gray-white matter differentiation and normal sulcal patterns for age. There are no focal parenchymal signal abnormalities, mass lesions, or areas of restricted diffusion. Ventricles and cisterns are unremarkable, with normal flow voids.\n\nImpression: Completely normal brain MRI. No structural abnormality, migration defect, or evidence of focal cortical dysplasia to explain new-onset focal seizures."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "absent"
 },
 {
-"hospital": "BCH",
-"study_id": "BR-5561",
-"patient_key": "d9322f18950ce146",
-"patient_name": "Patel^Aarav",
-"patient_id": "CHB-93012",
-"birth_date": "20080112",
-"age_years": 18.0,
-"sex": "M",
-"study_date": "20260114",
-"modality": "MR",
-"body_part": "BRAIN",
-"diagnosis": "Magnetic resonance imaging of the brain was performed using dedicated epilepsy-protocol sequences, including high-resolution 3D T1-weighted and FLAIR acquisitions. There is no evidence of focal cortical dysplasia, hippocampal atrophy, or signal asymmetry in the temporal lobes. The cerebral ventricles and sulcal patterns are normal for age without intracranial masses or hemorrhage.\n\nImpression: Unremarkable and negative epilepsy-protocol brain MRI. No structural abnormality or epileptogenic focus identified on current sequences."
+"dimension": "finding_type",
+"value": "Ischemia",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Brainstem",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+}
+],
+"diagnosis": "Magnetic resonance imaging of the brain was performed using multiplanar, multisequence protocols. Brain parenchyma demonstrates normal signal intensity and morphology without evidence of acute ischemia, hemorrhage, or mass effect. Ventricles, sulci, and extra-axial CSF spaces are within normal limits for patient age. The brainstem and cerebellum are unremarkable, and vascular flow voids are normal.\n\nImpression: Unremarkable brain MRI. No structural abnormality, mass lesion, or demyelinating process identified to explain chronic migraine symptoms."
 },
 {
 "hospital": "BCH",
@@ -138,7 +639,146 @@ window.DAB_SAMPLE = [
 "study_date": "20251214",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Intracranial Hemorrhage",
+"status": "absent"
+}
+],
 "diagnosis": "Structural MRI of the brain shows normal parenchymal signal and volume. No acute infarction, intracranial hemorrhage, mass lesion, or abnormal enhancement is seen. The ventricles and sulci are normal in configuration. The dural venous sinuses show normal flow voids on all sequences.\n\nImpression: Unremarkable brain MRI. No structural abnormality or intracranial pathology detected to account for the patient's syncopal episodes."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-7110",
+"patient_key": "e48be1c2bce17abe",
+"patient_name": "Kwon^Min-Ji",
+"patient_id": "CHB-81203",
+"birth_date": "20140808",
+"age_years": 11.0,
+"sex": "F",
+"study_date": "20251025",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Bilateral",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Small",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI and MRA demonstrate severe, bilateral narrowing of the distal internal carotid arteries (ICA) at the terminus, along with occlusion of the proximal segments of the middle and anterior cerebral arteries. Extensive fine collateral networks at the skull base are visualized, creating a 'puff of smoke' appearance on MRA. Multiple small, chronic watershed infarcts are noted.\n\nImpression: Bilateral distal ICA steno-occlusive disease with extensive lenticulostriate collateralization, consistent with Moyamoya disease. Multiple small chronic ischemic changes."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-7714",
+"patient_key": "6ded5c3ca27d9c06",
+"patient_name": "Nguyen^Thanh",
+"patient_id": "CHB-21049",
+"birth_date": "20250512",
+"age_years": 0.417,
+"sex": "M",
+"study_date": "20251020",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Hydrocephalus",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI of this 5-month-old infant demonstrates a severely hypoplastic cerebellar vermis, which is rotated superiorly. There is massive cystic dilation of the posterior fossa CSF space, which freely communicates with an enlarged fourth ventricle. The tentorium cerebelli and transverse sinuses are elevated. The lateral and third ventricles show moderate symmetric dilation, consistent with early hydrocephalus.\n\nImpression: Diagnostic features of Dandy-Walker malformation associated with mild-to-moderate supratentorial ventriculomegaly."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-7740",
+"patient_key": "4446e4b852ee1b6a",
+"patient_name": "Russo^Isabella",
+"patient_id": "CHB-50291",
+"birth_date": "20091130",
+"age_years": 16.0,
+"sex": "F",
+"study_date": "20251130",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Intracranial Hemorrhage",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Bilateral",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI reveals flattening of the posterior sclera bilaterally, prominent fluid surrounding the optic nerves within the optic sheaths, and mild empty sella turcica. There are no space-occupying lesions, venous sinus thromboses, or intracranial hemorrhages. The cerebral ventricles are somewhat narrow but remain within normal physiological limits.\n\nImpression: Radiographic findings of bilateral optic nerve sheath distension, posterior scleral flattening, and empty sella, which are highly suggestive of idiopathic intracranial hypertension (pseudotumor cerebri). Correlation with clinical lumbar puncture opening pressure is advised."
 },
 {
 "hospital": "BCH",
@@ -152,7 +792,107 @@ window.DAB_SAMPLE = [
 "study_date": "20251201",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Brainstem",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "3.6 x 3.5 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Marked",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
 "diagnosis": "Brain MRI demonstrates a large, solid mass centered within the fourth ventricle measuring approximately 3.8 x 3.6 x 3.5 cm. The lesion shows heterogeneous enhancement following contrast administration and restricts diffusion on DWI sequences. Marked mass effect is noted on the brainstem and cerebellar vermis, resulting in obstruction of CSF outflow and moderate-to-severe dilatation of the lateral and third ventricles with transependymal flow.\n\nImpression: Large fourth ventricular mass causing obstructive hydrocephalus, most consistent with a medulloblastoma or ependymoma. Emergent neurosurgical referral is indicated."
+},
+{
+"hospital": "BCH",
+"study_id": "BR-8822",
+"patient_key": "a42b908d79bfa948",
+"patient_name": "Patel^Devan",
+"patient_id": "CHB-41982",
+"birth_date": "20190822",
+"age_years": 6.0,
+"sex": "M",
+"study_date": "20250822",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hydrocephalus",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "3.5 x 3.2 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Significant",
+"status": "present"
+}
+],
+"diagnosis": "MR examination of the brain reveals a solid, hyperintense mass on T2/FLAIR centered in the cerebellar vermis, measuring approximately 3.8 x 3.5 x 3.2 cm. The lesion shows prominent, heterogeneous contrast enhancement and restricted diffusion. There is significant mass effect on the fourth ventricle, which is severely compressed, leading to severe obstructive hydrocephalus with transependymal flow of cerebrospinal fluid noted around the lateral ventricles.\n\nImpression: Large posterior fossa mass arising from the cerebellar vermis, highly suggestive of medulloblastoma given the patient's age and imaging features. Marked obstructive hydrocephalus is present, necessitating urgent neurosurgical decompression."
 },
 {
 "hospital": "BCH",
@@ -166,6 +906,64 @@ window.DAB_SAMPLE = [
 "study_date": "20260514",
 "modality": "MR",
 "body_part": "FETAL",
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Intracranial Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Stenosis",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Ventriculomegaly",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "12.4 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "6.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+}
+],
 "diagnosis": "Fetal MRI at 32 weeks gestation shows prominent asymmetry of the lateral ventricles. The right lateral ventricle atrium is dilated, measuring 12.4 mm, consistent with moderate unilateral ventriculomegaly. The left lateral ventricle is entirely normal, measuring 6.5 mm. Cortical folding and sulcation are advanced and age-appropriate, and the corpus callosum is fully intact. There is no evidence of intracranial hemorrhage, mass, or aqueductal stenosis.\n\nImpression: Isolated right-sided moderate fetal ventriculomegaly. Serial ultrasound evaluations are recommended to monitor for progression or resolution."
 },
 {
@@ -180,7 +978,169 @@ window.DAB_SAMPLE = [
 "study_date": "20260405",
 "modality": "MR",
 "body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Thrombus",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "5.2 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "7.8 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+}
+],
 "diagnosis": "Cardiac MRI demonstrates a giant aneurysm of the proximal to mid-left anterior descending (LAD) coronary artery measuring 7.8 mm in diameter, as well as a moderate aneurysm of the proximal right coronary artery (RCA) measuring 5.2 mm. There is no evidence of thrombus within the aneurysms. The left ventricular volumes are normal, with a preserved ejection fraction of 61%, and late gadolinium enhancement is negative for myocardial infarction.\n\nImpression: Follow-up of Kawasaki disease demonstrating a giant LAD coronary artery aneurysm and a moderate proximal RCA aneurysm without evidence of acute coronary thrombus or myocardial scar."
+},
+{
+"hospital": "BCH",
+"study_id": "HT-3211",
+"patient_key": "766f189350bbc179",
+"patient_name": "Kovalenko^Dmitry",
+"patient_id": "CHB-34251",
+"birth_date": "20051212",
+"age_years": 20.0,
+"sex": "M",
+"study_date": "20251215",
+"modality": "MR",
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Dyskinesia",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac MRI demonstrates global dilation of the right ventricle with an indexed end-diastolic volume of 122 mL/m2. Right ventricular ejection fraction is severely depressed at 34%. There are regional wall motion abnormalities consisting of dyskinesia and microaneurysms in the right ventricular outflow tract (RVOT) and apex. T1-weighted imaging and late gadolinium enhancement show focal fatty infiltration and transmural fibrous replacement in the RV free wall. The left ventricle is normal in size and function (LVEF 58%).\n\nImpression: Right ventricular dilation, severe dysfunction, regional dyskinesia, and myocardial replacement fibrosis meeting major Task Force criteria for Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)."
+},
+{
+"hospital": "BCH",
+"study_id": "HT-3301",
+"patient_key": "62955404ad8a6249",
+"patient_name": "Moreno^Mateo",
+"patient_id": "CHB-44129",
+"birth_date": "20250901",
+"age_years": 0.25,
+"sex": "M",
+"study_date": "20251201",
+"modality": "MR",
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Stenosis",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Biventricular",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac MRI of a 3-month-old infant demonstrates both the aorta and the pulmonary artery arising almost entirely from the morphologic right ventricle, consistent with a double outlet right ventricle (DORV). A large, subaortic ventricular septal defect (VSD) is noted. There is mild stenosis of the pulmonary valve with a peak systolic gradient across the RVOT of 20 mmHg. Biventricular function is globally preserved.\n\nImpression: Double outlet right ventricle with a large subaortic VSD and mild pulmonary valve stenosis."
 },
 {
 "hospital": "BCH",
@@ -194,7 +1154,77 @@ window.DAB_SAMPLE = [
 "study_date": "20260304",
 "modality": "MR",
 "body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Biventricular",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "absent"
+}
+],
 "diagnosis": "Magnetic resonance imaging of the heart was performed to evaluate for structurally abnormal congenital anomalies. There is normal biventricular chamber size, wall thickness, and global systolic function. The left ventricular ejection fraction is calculated at 63% and the right ventricular ejection fraction is 61%. No focal myocardial wall motion abnormalities, myocardial edema, or late gadolinium enhancement are identified.\n\nImpression: Normal pediatric cardiac MRI. No structural congenital heart disease, cardiomyopathy, or focal myocardial scarring is visualized."
+},
+{
+"hospital": "BCH",
+"study_id": "HT-5105",
+"patient_key": "3a39fe47ed546776",
+"patient_name": "Gomez^Sofia",
+"patient_id": "CHB-12505",
+"birth_date": "20210722",
+"age_years": 4.0,
+"sex": "F",
+"study_date": "20251205",
+"modality": "MR",
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac MRI performed for screening of a 4-year-old female with a history of Kawasaki disease resolved two years prior. High-resolution MR angiography of the coronary arteries demonstrates normal anatomy. The main left coronary artery, left anterior descending, circumflex, and right coronary arteries are normal in course and caliber without evidence of dilation, ectasia, or aneurysm. Left and right ventricular chamber sizes, wall thicknesses, and global systolic function are completely normal (LVEF 62%, RVEF 59%).\n\nImpression: Unremarkable cardiac MRI showing normal coronary artery anatomy and normal ventricular function. No sequelae of Kawasaki disease are identified."
 },
 {
 "hospital": "BCH",
@@ -208,6 +1238,39 @@ window.DAB_SAMPLE = [
 "study_date": "20250815",
 "modality": "MR",
 "body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
 "diagnosis": "Cardiac MRI of a 20-year-old male presenting with syncope during mild exercise. Comprehensive evaluation including cine sequences, stress perfusion, and late gadolinium enhancement (LGE) imaging reveals normal cardiac morphology. Calculated left ventricular ejection fraction is 62% and right ventricular ejection fraction is 60%, with no regional wall motion abnormalities or ventricular dilation. Myocardial perfusion is completely homogeneous under pharmacological stress, and there is no evidence of LGE or myocardial edema.\n\nImpression: Completely normal cardiac MRI study. No ischemic, inflammatory, or hypertrophic cardiac pathology is identified to account for the syncopal episodes."
 },
 {
@@ -222,7 +1285,92 @@ window.DAB_SAMPLE = [
 "study_date": "20251012",
 "modality": "MR",
 "body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Stenosis",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Thrombus",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "6.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "7.2 mm",
+"status": "present"
+}
+],
 "diagnosis": "Evaluation for coronary anomalies following Kawasaki disease. Cardiac MRI demonstrates giant aneurysmal dilation of both the left main coronary artery (measuring 7.2 mm in diameter) and the proximal right coronary artery (measuring 6.5 mm in diameter). There is no evidence of luminal thrombus or stenosis. Myocardial perfusion imaging shows no inducible perfusion defects during stress, and no late gadolinium enhancement is present.\n\nImpression: Giant coronary artery aneurysms of the left main and proximal right coronary arteries, consistent with sequelae of Kawasaki disease. Normal global left ventricular function (LVEF 63%) and no evidence of myocardial ischemia or infarction."
+},
+{
+"hospital": "BCH",
+"study_id": "HT-6948",
+"patient_key": "ec5858a8649d7277",
+"patient_name": "Sow^Mariama",
+"patient_id": "CHB-74923",
+"birth_date": "20101111",
+"age_years": 15.0,
+"sex": "F",
+"study_date": "20260120",
+"modality": "MR",
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+}
+],
+"diagnosis": "Multiplanar cardiac MRI demonstrates normal cardiac chamber morphology and size. Left ventricular ejection fraction is calculated at 62%, and right ventricular ejection fraction is 57%. No regional wall motion abnormalities or areas of myocardial edema are identified on cine or T2-weighted imaging. Late gadolinium enhancement is absent. The thoracic aorta is normal in caliber.\n\nImpression: Normal cardiac MRI with normal biventricular size and function, and no evidence of myocardial scar or active inflammation."
 },
 {
 "hospital": "BCH",
@@ -236,21 +1384,107 @@ window.DAB_SAMPLE = [
 "study_date": "20250810",
 "modality": "MR",
 "body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Thrombus",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "4.2 mm",
+"status": "absent"
+},
+{
+"dimension": "size",
+"value": "9.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Small",
+"status": "absent"
+}
+],
 "diagnosis": "High-resolution coronary MRA was performed to monitor coronary artery aneurysms secondary to atypical Kawasaki disease. There is a giant saccular aneurysm of the proximal left anterior descending (LAD) coronary artery, measuring 9.5 mm in maximum diameter, with sluggish internal blood flow but no thrombus. A smaller 4.2 mm fusiform aneurysm is also seen in the proximal right coronary artery (RCA). Myocardial perfusion and late-phase LGE imaging show no evidence of prior myocardial infarction.\n\nImpression: Coronary artery aneurysms secondary to Kawasaki disease, including a giant proximal LAD aneurysm. Biventricular function remains completely normal (LVEF 64%) with no myocardial scarring."
 },
 {
 "hospital": "BCH",
-"study_id": "HT-8818",
-"patient_key": "5401b371983917a8",
-"patient_name": "Moreno^Thiago",
-"patient_id": "CHB-55610",
-"birth_date": "20211202",
-"age_years": 4.0,
-"sex": "M",
-"study_date": "20251202",
+"study_id": "HT-8092",
+"patient_key": "325a49485c449719",
+"patient_name": "Mensah^Akosua",
+"patient_id": "CHB-70891",
+"birth_date": "20060604",
+"age_years": 20.0,
+"sex": "F",
+"study_date": "20260604",
 "modality": "MR",
 "body_part": "HEART",
-"diagnosis": "3D cardiac MR angiography evaluated for coronary sequelae of Kawasaki disease. There is a prominent saccular aneurysm involving the proximal left anterior descending (LAD) coronary artery measuring 6.2 mm in diameter. A separate, fusiform dilation of the proximal right coronary artery (RCA) is also noted, measuring 4.1 mm. Myocardial perfusion and late gadolinium enhancement images are normal, with no evidence of inducible ischemia or prior myocardial infarction. Ventricular function is normal (LVEF 62%).\n\nImpression: Coronary artery aneurysms involving the proximal LAD and proximal RCA, consistent with history of Kawasaki disease. No associated myocardial ischemia or fibrosis."
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Dyskinesia",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Fibrosis",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Marked",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Significant",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac MRI shows marked right ventricular dilation with an end-diastolic volume index of 134 mL/m\u00b2 and regional areas of dyskinesis and microaneurysm formation along the right ventricular free wall and outflow tract. Right ventricular ejection fraction is significantly reduced at 35%. T1-weighted imaging and late gadolinium enhancement demonstrate patchy transmural fibrosis and fat infiltration within the right ventricular free wall.\n\nImpression: Structural and functional abnormalities of the right ventricle meeting major diagnostic task force criteria for Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)."
 },
 {
 "hospital": "BCH",
@@ -264,6 +1498,44 @@ window.DAB_SAMPLE = [
 "study_date": "20260215",
 "modality": "MR",
 "body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Stenosis",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "9.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Significant",
+"status": "present"
+}
+],
 "diagnosis": "Cardiac MRI evaluates a 6-month-old infant with complex congenital heart disease. There is a double outlet right ventricle (DORV) with both the aorta and pulmonary artery arising entirely from the right ventricle. A large, non-restrictive subaortic ventricular septal defect (VSD) is identified, measuring approximately 9.5 mm. Severe infundibular pulmonary stenosis is visualized, causing significant restriction of blood flow into the pulmonary trunk.\n\nImpression: Complex congenital heart disease characterized by a double outlet right ventricle, a large subaortic VSD, and severe infundibular pulmonary stenosis (resembling Tetralogy of Fallot physiology). Left ventricular systolic function is 58%."
 },
 {
@@ -278,91 +1550,316 @@ window.DAB_SAMPLE = [
 "study_date": "20251005",
 "modality": "MR",
 "body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Stenosis",
+"status": "absent"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "absent"
+}
+],
 "diagnosis": "Cardiac MRI evaluates status post arterial switch operation for d-transposition of the great arteries (d-TGA). The reconstructed neoaorta is stable without dilatation or stenosis. There is mild, focal narrowing at the site of the neopulmonary anastomosis with a localized peak velocity of 2.4 m/s. The coronary artery origins are well-visualized and appear normal.\n\nImpression: Post-arterial switch state with stable neoaortic reconstruction and mild, clinically stable neopulmonary supravalvular stenosis. Biventricular size and systolic function are preserved (LVEF 59%)."
 },
 {
 "hospital": "BWH",
-"study_id": "BR-1520",
-"patient_key": "9a073fc695d87ab5",
-"patient_name": "Obi^Nneka",
-"patient_id": "BWH-12345",
-"birth_date": "19961012",
-"age_years": 29.0,
+"study_id": "BR-1940",
+"patient_key": "61e2daf1e9a12bb8",
+"patient_name": "Diop^Awa",
+"patient_id": "BWH-66129",
+"birth_date": "19940718",
+"age_years": 31.0,
 "sex": "F",
-"study_date": "20251112",
+"study_date": "20260302",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "Magnetic resonance imaging of the brain was performed using standard clinical sequences. There are symmetric areas of T2 and FLAIR hyperintensity in the subcortical white matter of the bilateral parieto-occipital lobes. Minimal mass effect is noted, and there is no evidence of restricted diffusion or acute infarction. The deep gray matter nuclei and brainstem are spared, and ventricles are normal in caliber.\n\nImpression: Bilateral parieto-occipital FLAIR hyperintensities, highly characteristic of Posterior Reversible Encephalopathy Syndrome (PRES) in this postpartum patient presenting with severe preeclampsia. Suggest close clinical correlation and blood pressure monitoring."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Intracranial Hemorrhage",
+"status": "absent"
+}
+],
+"diagnosis": "Magnetic resonance imaging of the brain is performed for persistent post-dural puncture headache. The ventricles, sulci, and cisterns are entirely unremarkable. There is no evidence of intracranial hypotension (such as dural pachymeningeal enhancement, subdural fluid collections, or pituitary engorgement) and no signs of intracranial hemorrhage.\n\nImpression: Unremarkable MRI of the brain. No structural, vascular, or secondary signs of intracranial hypotension identified to account for postpartum spinal-related headaches."
 },
 {
 "hospital": "BWH",
-"study_id": "BR-2299",
-"patient_key": "26aa9cebd53f6ec6",
-"patient_name": "Tanaka^Naomi",
-"patient_id": "BWH-65748",
-"birth_date": "19641201",
-"age_years": 62.0,
-"sex": "F",
-"study_date": "20250819",
-"modality": "MR",
-"body_part": "BRAIN",
-"diagnosis": "Brain MRI demonstrates acute subarachnoid hemorrhage with hyperintense signal on FLAIR sequences and corresponding susceptibility artifact on susceptibility-weighted imaging (SWI) within the basal cisterns, sylvian fissures, and cerebral sulci. No underlying parenchymal hemorrhage or acute territorial infarction is seen. The cerebral ventricles are mildly prominent, suggesting early acute communicating hydrocephalus.\n\nImpression: Acute subarachnoid hemorrhage centered in the basal cisterns and sylvian fissures. Mild early ventriculomegaly; urgent digital subtraction angiography (DSA) or CT angiography is indicated to evaluate for intracranial aneurysm."
-},
-{
-"hospital": "BWH",
-"study_id": "BR-4211",
-"patient_key": "c7b179fbc82e1dfe",
-"patient_name": "Sorensen^Freja",
-"patient_id": "BWH-43656",
-"birth_date": "19930419",
-"age_years": 32.0,
-"sex": "F",
-"study_date": "20250918",
-"modality": "MR",
-"body_part": "BRAIN",
-"diagnosis": "Multiple discrete, ovoid T2/FLAIR hyperintense lesions are identified within the periventricular, juxtacortical, and infratentorial white matter. Several lesions are oriented perpendicular to the lateral ventricles, consistent with Dawson's fingers. Following contrast administration, two active periventricular lesions show nodular and open-ring enhancement, demonstrating dissemination in time.\n\nImpression: Demyelinating disease demonstrating dissemination in both space and time, highly characteristic of active relapsing-remitting multiple sclerosis."
-},
-{
-"hospital": "BWH",
-"study_id": "BR-4402",
-"patient_key": "8491de9cae85c711",
-"patient_name": "Wang^Hao",
-"patient_id": "BWH-77104",
-"birth_date": "19631012",
-"age_years": 62.0,
+"study_id": "BR-2009",
+"patient_key": "869d2735f1c0c1d4",
+"patient_name": "Diop^Amadou",
+"patient_id": "BWH-11902",
+"birth_date": "19570719",
+"age_years": 68.0,
 "sex": "M",
-"study_date": "20260322",
+"study_date": "20251201",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "Brain MRI performed for evaluation of vertigo demonstrates normal signal intensity and morphology of the brainstem, cerebellum, and CPA cisterns. No acute infarctions or hemorrhages are present. The ventricles and extra-axial spaces are appropriate in size for the patient's age. The major intracranial flow voids are intact.\n\nImpression: Unremarkable MRI of the brain. No central structural etiology identified to account for the patient's dizziness or vertigo."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Intracranial Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Midline Shift",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Midline",
+"status": "absent"
+}
+],
+"diagnosis": "Diffusion-weighted imaging (DWI) demonstrates an area of restricted diffusion with corresponding low ADC values within the left middle cerebral artery (MCA) territory, specifically involving the left insular cortex and frontoparietal operculum. Minimal mass effect is observed, with no midline shift. No intracranial hemorrhage is identified on susceptibility-weighted imaging (SWI).\n\nImpression: Acute ischemic stroke within the left MCA territory. No hemorrhagic transformation is visualized on current sequences. Prompt clinical management is recommended."
 },
 {
 "hospital": "BWH",
-"study_id": "BR-6891",
-"patient_key": "3084380ea98c8cbb",
-"patient_name": "Al-Farsi^Fatima",
-"patient_id": "BWH-89012",
-"birth_date": "19841201",
-"age_years": 41.0,
+"study_id": "BR-3921",
+"patient_key": "714b4c8f92e8c758",
+"patient_name": "Abara^Nneka",
+"patient_id": "BWH-34812",
+"birth_date": "19970822",
+"age_years": 28.0,
 "sex": "F",
-"study_date": "20250918",
+"study_date": "20251205",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "Magnetic resonance imaging of the brain was performed utilizing multiplanar, multisequence protocols. There is no evidence of intra-axial or extra-axial mass lesion, acute ischemia, or intracranial hemorrhage. The ventricles and sulci are within normal limits for patient age, with no signs of hydrocephalus. The major intracranial vascular flow voids are well-preserved.\n\nVisualized paranasal sinuses and mastoid air cells are clear. Impression: Unremarkable MRI of the brain. No structural, vascular, or acute pathological changes identified."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "location",
+"value": "Brainstem",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebral Hemisphere",
+"status": "present"
+}
+],
+"diagnosis": "Magnetic resonance imaging of the brain demonstrates normal signal intensity and morphology of the cerebral hemispheres, brainstem, and cerebellum. The ventricular system, basal cisterns, and cerebral sulci are within normal limits for age. No abnormal extra-axial fluid collections or pathological enhancement are visualized following contrast administration.\n\nImpression: Unremarkable MRI of the brain with no acute intracranial pathology or structural abnormalities identified. The study is completely normal, ruling out secondary causes for the patient's severe chronic headaches."
 },
 {
 "hospital": "BWH",
-"study_id": "BR-7114",
-"patient_key": "f857b65c994b1a56",
-"patient_name": "Taylor^Ethan",
-"patient_id": "BWH-10034",
-"birth_date": "19920330",
-"age_years": 33.0,
-"sex": "M",
-"study_date": "20251114",
+"study_id": "BR-4514",
+"patient_key": "6abbd65c1a95ab21",
+"patient_name": "Kim^Ji-Young",
+"patient_id": "BWH-11014",
+"birth_date": "19910115",
+"age_years": 34.0,
+"sex": "F",
+"study_date": "20260718",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "MRI brain study shows normal parenchymal signal and volume. No focal areas of restricted diffusion are observed on DWI/ADC, ruling out acute ischemic stroke. No abnormal intra- or extra-axial fluid accumulations, subarachnoid hemorrhage, or subdural hematoma are visible. The venous sinuses are patent and flow voids are normal.\n\nImpression: Completely unremarkable brain MRI. No acute intracranial findings or trauma-related parenchymal injury detected."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Bilateral",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Parietal Lobe",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI demonstrates bilateral, symmetric areas of high signal intensity on T2/FLAIR sequences located primarily in the subcortical white matter of the occipital and parietal lobes. These areas do not show restricted diffusion on DWI, indicating vasogenic rather than cytotoxic edema.\n\nImpression: Radiographic findings consistent with Posterior Reversible Encephalopathy Syndrome (PRES), clinically correlating with the patient's history of severe preeclampsia and eclamptic seizures during labor."
+},
+{
+"hospital": "BWH",
+"study_id": "BR-5109",
+"patient_key": "78873c1dcb2401eb",
+"patient_name": "Taylor^Brianna",
+"patient_id": "BWH-90231",
+"birth_date": "20011009",
+"age_years": 24.0,
+"sex": "F",
+"study_date": "20260218",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Bilateral",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Parieto-Occipital",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI performed postpartum following severe preeclamptic seizure activity. Bilateral, relatively symmetric cortical and subcortical FLAIR hyperintensities are identified within the parieto-occipital regions. These lesions represent vasogenic edema with corresponding normal or increased ADC values; no restricted diffusion is present.\n\nImpression: Findings are highly characteristic of Posterior Reversible Encephalopathy Syndrome (PRES) in the clinical context of postpartum preeclampsia. Clinical monitoring is recommended, as these findings typically resolve with blood pressure control."
+},
+{
+"hospital": "BWH",
+"study_id": "BR-7105",
+"patient_key": "b990873b6273d369",
+"patient_name": "Mbaye^Amina",
+"patient_id": "BWH-10025",
+"birth_date": "19870911",
+"age_years": 38.0,
+"sex": "F",
+"study_date": "20260218",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "size",
+"value": "1.2 x 1.1 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "Dedicated pituitary and brain MRI demonstrates a well-circumscribed, solid mass arising from the adenohypophysis, measuring 1.4 x 1.2 x 1.1 cm. The lesion demonstrates intermediate signal on T1, high signal on T2, and heterogeneous enhancement post-contrast. There is mild superior extension into the suprasellar cistern, but the optic chiasm is not compressed and remains structurally intact.\n\nImpression: Pituitary macroadenoma with mild suprasellar extension. No direct compression of the optic chiasm is observed."
+},
+{
+"hospital": "BWH",
+"study_id": "BR-7116",
+"patient_key": "dd33b776afeed635",
+"patient_name": "Abebe^Marta",
+"patient_id": "BWH-10036",
+"birth_date": "19731210",
+"age_years": 52.0,
+"sex": "F",
+"study_date": "20260610",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Ischemia",
+"status": "present"
+}
+],
+"diagnosis": "Multiplanar MRI brain scans are unremarkable. No structural abnormalities, intracranial mass lesions, or acute ischemia are seen. The ventricular system and sulci are normal for the patient's age, and the major cerebral blood vessels demonstrate normal signal voids without evidence of aneurysm or vascular malformation.\n\nImpression: Normal MRI of the brain. No focal intracranial pathology is demonstrated to account for the patient's sensory symptoms."
+},
+{
+"hospital": "BWH",
+"study_id": "BR-8131",
+"patient_key": "d713c15ca1db5a07",
+"patient_name": "Higgins^Robert",
+"patient_id": "BWH-44551",
+"birth_date": "19540902",
+"age_years": 71.0,
+"sex": "M",
+"study_date": "20260405",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Midline Shift",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Subdural Hematoma",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Midline",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "1.8 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "8 mm",
+"status": "present"
+}
+],
+"diagnosis": "Brain MRI shows a crescentic extra-axial fluid collection along the right frontoparietal convexity measuring up to 1.8 cm in maximal thickness. The collection is hyperintense on T2 and iso-to-hyperintense on T1, suggesting a subacute to chronic subdural hematoma. There is substantial mass effect with partial compression of the right lateral ventricle and 8 mm of leftward midline shift.\n\nImpression: Large subacute to chronic right frontoparietal subdural hematoma with significant mass effect and midline shift. Neurosurgical evaluation is indicated."
 },
 {
 "hospital": "BWH",
@@ -376,217 +1873,558 @@ window.DAB_SAMPLE = [
 "study_date": "20260322",
 "modality": "MR",
 "body_part": "FETAL",
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "location",
+"value": "Bilateral",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Kidneys",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Parieto-Occipital",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "6.0 mm",
+"status": "present"
+}
+],
 "diagnosis": "Fetal MRI performed at 32 weeks gestation to evaluate fetal growth restriction. The single fetus is imaged in multiple projections. Intracranial structures demonstrate normal morphology. The lateral ventricular atrial measurements are symmetric at 6.0 mm bilaterally, which is well within normal limits. The sulcation and gyration pattern is normal for 32 weeks gestation, with well-formed cingulate, calcarine, and parieto-occipital sulci, as well as developing secondary sulci.\n\nThe fetal thoracic volume, abdomen, kidneys, and extremities are morphologically normal. Amniotic fluid volume is borderline low, but no specific fetal anomalies are seen. Impression: Normal fetal brain morphology and age-appropriate sulcation pattern. No structural anomalies detected."
 },
 {
 "hospital": "BWH",
-"study_id": "FT-1283",
-"patient_key": "58bef02a1fb0db5a",
-"patient_name": "Rodriguez^Elena",
-"patient_id": "BWH-83912",
-"birth_date": "19830707",
-"age_years": 42.0,
+"study_id": "FT-2305",
+"patient_key": "e3b691263ed4f9cb",
+"patient_name": "Nguyen^Thanh",
+"patient_id": "BWH-89014",
+"birth_date": "19961010",
+"age_years": 30.0,
 "sex": "F",
-"study_date": "20250912",
+"study_date": "20260528",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 34 weeks gestation demonstrates a left-sided diaphragmatic hernia. The stomach and small bowel loops are herniated into the left chest, resulting in a moderate mediastinal shift to the right. The left lung is compressed and its volume is severely reduced. The right lung appears normal. Fetal brain maturation and sulcation are appropriate for 34 weeks, and lateral ventricles are symmetric at 5.8 mm.\n\nNo other anomalies are identified. Impression: Left-sided congenital diaphragmatic hernia with severe compression of the left lung."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "location",
+"value": "Brainstem",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "5.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "absent"
+}
+],
+"diagnosis": "Fetal MRI at 35 weeks gestation demonstrates fully matured cerebral architecture. Cortical folding is highly advanced and appropriate for 35 weeks, with clear development of secondary and tertiary sulci. The lateral ventricles are completely normal, with the atrium measuring 5.5 mm on both sides. The corpus callosum, optic chiasm, and brainstem are completely normal in appearance.\n\nNo focal abnormalities are seen in the chest, abdomen, or spine. Placentation is posterior and uncomplicated. Impression: Entirely normal third-trimester fetal MRI study demonstrating reassuring neurological and structural development."
 },
 {
 "hospital": "BWH",
-"study_id": "FT-2119",
-"patient_key": "5a4d513531c08605",
-"patient_name": "Silva^Beatriz",
-"patient_id": "BWH-84920",
-"birth_date": "20011005",
-"age_years": 24.0,
+"study_id": "FT-3512",
+"patient_key": "3949a675c357df07",
+"patient_name": "Haddad^Leila",
+"patient_id": "BWH-60312",
+"birth_date": "19921130",
+"age_years": 33.0,
 "sex": "F",
-"study_date": "20260701",
+"study_date": "20261105",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 28 weeks gestation. The cerebellar vermis is hypoplastic and mildly rotated upward, with a keyhole-like communication between the fourth ventricle and the posterior fossa fluid space. The posterior fossa is mildly enlarged, but there is no massive cystic expansion. Sulcation is normal for 28 weeks, and the lateral ventricles are normal, measuring 6.8 mm bilaterally.\n\nImpression: Dandy-Walker variant (isolated inferior vermian hypoplasia) without associated ventriculomegaly."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "10.8 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 27 weeks gestation demonstrates a partial agenesis of the corpus callosum. High-resolution sagittal sequences show that only the anterior portions (rostrum and body) of the corpus callosum are present, with complete absence of the splenium. This is associated with mild colpocephaly, with the posterior horns of the lateral ventricles measuring 10.8 mm. Cortical sulcation is age-appropriate.\n\nThe optic chiasm and pituitary gland appear normal. No extracranial abnormalities are seen. Impression: Partial agenesis of the corpus callosum with associated mild posterior ventriculomegaly."
 },
 {
 "hospital": "BWH",
-"study_id": "FT-5025",
-"patient_key": "75407ba1cc637414",
-"patient_name": "Kim^MinJi",
-"patient_id": "BWH-55394",
-"birth_date": "19940130",
-"age_years": 32.0,
+"study_id": "FT-5030",
+"patient_key": "b56528b291e33097",
+"patient_name": "Alves^Beatriz",
+"patient_id": "BWH-20412",
+"birth_date": "19960228",
+"age_years": 30.0,
 "sex": "F",
-"study_date": "20260604",
+"study_date": "20260205",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 31 weeks gestation reveals complete agenesis of the corpus callosum associated with a large interhemispheric cyst. The cyst measures 3.2 x 2.4 x 2.1 cm and communicates with the third ventricle. Teardrop-shaped lateral ventricles (colpocephaly) are observed, with atrial widths measuring 15.0 mm on the left and 14.2 mm on the right, signifying severe ventriculomegaly.\n\nCortical sulcation matches 31-week standards, and no other focal lesions or anomalies are seen. Impression: Complete corpus callosum agenesis, a large interhemispheric cyst, and severe colpocephaly. High risk of neurodevelopmental delays."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "6.2 mm",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI performed at 25 weeks 1 day gestation. Evaluation of the fetal brain demonstrates normal gyral development and sulcation. The ventricular system is completely symmetric and non-dilated, with ventricular atria measuring 6.2 mm. The corpus callosum and posterior fossa elements are well-visualized and structurally normal.\n\nThe chest, abdomen, spine, and extremities are morphologically appropriate for gestational age. Impression: Normal fetal MRI study with no structural anomalies or developmental delays identified."
 },
 {
 "hospital": "BWH",
-"study_id": "FT-8002",
-"patient_key": "ff8aa2165178eec6",
+"study_id": "FT-5541",
+"patient_key": "c6cce66bff8c021f",
 "patient_name": "Dubois^Chloe",
-"patient_id": "BWH-44219",
-"birth_date": "19981122",
-"age_years": 27.0,
+"patient_id": "BWH-52831",
+"birth_date": "19941122",
+"age_years": 31.0,
 "sex": "F",
-"study_date": "20251115",
+"study_date": "20260212",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 28 weeks gestation demonstrates significant dilation of the lateral ventricles bilaterally. The left lateral ventricular atrium measures 14.5 mm, and the right lateral ventricular atrium measures 13.8 mm, indicative of moderate ventriculomegaly. There is associated thinning and mild stretching of the corpus callosum, though the structural pathway remains intact. The overlying cerebral cortex shows appropriate sulcal development and operculization for 28 weeks.\n\nThe posterior fossa structures, including the cerebellum and brainstem, are unremarkable. No other fetal anomalies are identified. Impression: Bilateral moderate ventriculomegaly with secondary thinning of the corpus callosum. Suggest clinical follow-up and postnatal neurodevelopmental counseling."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Ventriculomegaly",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "11.2 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "14.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 26 weeks gestation demonstrates progressive ventriculomegaly. The left lateral ventricle atrium is dilated, measuring 14.5 mm, while the right lateral ventricle atrium measures 11.2 mm. There is mild thinning of the posterior corpus callosum, though the overall structure is visualized. The cortical sulcation pattern is appropriate for 26 weeks.\n\nNo other intracranial anomalies, hemorrhage, or extra-axial fluid collections are identified. Visualized fetal chest and abdominal organs are unremarkable. Impression: Prominent asymmetric ventriculomegaly, moderate on the left and mild on the right. Clinical follow-up with serial ultrasound is recommended."
 },
 {
 "hospital": "BWH",
-"study_id": "FT-8890",
-"patient_key": "87ce0b3a289e9f15",
-"patient_name": "Mensah^Ama",
-"patient_id": "BWH-39485",
-"birth_date": "19991130",
-"age_years": 26.0,
+"study_id": "FT-6623",
+"patient_key": "6094fe398290bc82",
+"patient_name": "Petrov^Anastasia",
+"patient_id": "BWH-74920",
+"birth_date": "19950821",
+"age_years": 30.0,
 "sex": "F",
-"study_date": "20260410",
+"study_date": "20250915",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 28 weeks gestation demonstrates a right-sided congenital diaphragmatic hernia (CDH). The liver and gallbladder are herniated into the right thoracic cavity, resulting in a leftward mediastinal shift and compression of the heart. The left lung volume is significantly compressed and the total lung-to-head ratio is reduced. Intracranial structures are normal with a lateral ventricle atrium of 5.8 mm.\n\nCerebral sulcation and cortical migration are normal for 28 weeks. Impression: Right-sided congenital diaphragmatic hernia with liver herniation and associated pulmonary hypoplasia."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "size",
+"value": "6.4 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 27 weeks gestation demonstrates severe skeletal anomalies. There is severe, symmetric rhizomelic shortening and bowing of all long bones. The thorax is narrow and bell-shaped with shortened ribs, causing secondary pulmonary hypoplasia. Frontal bossing of the skull is prominent. The ventricular atrium measures 6.4 mm, and cerebral cortical sulcation is appropriate for 27 weeks.\n\nNo internal organ herniations are present. Impression: Severe skeletal dysplasia with narrow thoracic diameter and secondary pulmonary hypoplasia, highly suggestive of thanatophoric dysplasia."
 },
 {
 "hospital": "BWH",
-"study_id": "FT-8942",
-"patient_key": "c4e73497a561c2b1",
-"patient_name": "Patel^Anjali",
-"patient_id": "BWH-88421",
-"birth_date": "19930218",
+"study_id": "FT-8118",
+"patient_key": "a1cd7e04319c0521",
+"patient_name": "Larsen^Astrid",
+"patient_id": "BWH-10945",
+"birth_date": "19890220",
+"age_years": 37.0,
+"sex": "F",
+"study_date": "20261103",
+"modality": "MR",
+"body_part": "FETAL",
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "6.8 mm",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 36 weeks gestation demonstrates advanced and symmetric fetal brain development. The lateral ventricles are completely normal, with the atrium measuring 6.8 mm. The corpus callosum is fully formed and has a normal thickness. The cortical gyration is highly complex, displaying well-developed secondary and tertiary sulci appropriate for 36 weeks.\n\nThe posterior fossa, face, neck, spine, and trunk demonstrate normal anatomy. There are no signs of fetal masses or diaphragmatic defects. Impression: Completely normal, unremarkable fetal MRI study at 36 weeks gestation showing expected advanced brain maturation and healthy organ development."
+},
+{
+"hospital": "BWH",
+"study_id": "FT-9302",
+"patient_key": "5f1ab03b26b5e56e",
+"patient_name": "Silva^Beatriz",
+"patient_id": "BWH-66774",
+"birth_date": "19920311",
+"age_years": 33.0,
+"sex": "F",
+"study_date": "20260408",
+"modality": "MR",
+"body_part": "FETAL",
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dandy-Walker Variant",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Ventriculomegaly",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "11.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Significant",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 35 weeks gestation demonstrates an atypical posterior fossa morphology. The cerebellar vermis is hypoplastic and rotated upwards, and there is mild enlargement of the cisterna magna, which communicates with the fourth ventricle. However, the torcular is not significantly elevated, consistent with a Dandy-Walker variant. Symmetrical ventriculomegaly is noted with atrial widths of 11.5 mm.\n\nCortical gyration patterns and tertiary sulcation are appropriate for 35 weeks. The fetal chest and limbs are within normal limits. Impression: Dandy-Walker variant with hypoplastic cerebellar vermis and mild bilateral ventriculomegaly."
+},
+{
+"hospital": "BWH",
+"study_id": "HT-4029",
+"patient_key": "360517633d2f1f85",
+"patient_name": "Oswald^Naomi",
+"patient_id": "BWH-14890",
+"birth_date": "19930822",
 "age_years": 32.0,
 "sex": "F",
-"study_date": "20260405",
+"study_date": "20251201",
 "modality": "MR",
-"body_part": "FETAL",
-"diagnosis": "Fetal MRI at 31 weeks gestation reveals partial agenesis of the corpus callosum. The anterior corpus callosum (genu and anterior body) is visualized, but the posterior body and splenium are absent. There is associated mild colpocephaly with prominent occipital horns of the lateral ventricles, measuring 11.2 mm on the left and 10.9 mm on the right. Sulcal development is normal.\n\nNo other structural abnormalities of the brainstem, cerebellum, or spine are identified. Fetal viscera are normal. Impression: Partial agenesis of the corpus callosum with associated mild bilateral ventriculomegaly/colpocephaly. Recommend postnatal clinical and neurodevelopmental evaluation."
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Hypokinesis",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Ischemic",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Diffuse",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac MRI was performed to evaluate acute-onset heart failure symptoms in the postpartum period. The left ventricle is moderately dilated with an end-diastolic volume of 185 mL and severely depressed systolic function, yielding an ejection fraction of 32%. Diffuse global hypokinesis is present. Right ventricular function is mildly reduced with an ejection fraction of 44%. T2-weighted mapping demonstrates mild diffuse myocardial edema, but there is no evidence of ischemic-pattern late gadolinium enhancement (LGE).\n\nImpression: Findings are highly characteristic of peripartum cardiomyopathy. The absence of late gadolinium enhancement is a favorable prognostic indicator for potential myocardial recovery with guideline-directed medical therapy."
 },
 {
 "hospital": "BWH",
-"study_id": "FT-9012",
-"patient_key": "9f054c125635ebd9",
-"patient_name": "Al-Farsi^Fatima",
-"patient_id": "BWH-88390",
-"birth_date": "19970119",
-"age_years": 29.0,
+"study_id": "HT-6029",
+"patient_key": "137dfbbaf4afa5f7",
+"patient_name": "Patel^Priya",
+"patient_id": "BWH-44912",
+"birth_date": "19940218",
+"age_years": 31.0,
 "sex": "F",
-"study_date": "20251215",
+"study_date": "20260124",
 "modality": "MR",
-"body_part": "FETAL",
-"diagnosis": "Fetal MRI at 34 weeks gestation demonstrates features consistent with skeletal dysplasia. There is marked shortening and bowing of all long bones, with the femur and humerus lengths falling below the 3rd percentile for gestational age. The fetal chest is small and narrow (bell-shaped thorax), and the ribs appear shortened. The head circumference is relatively large with frontal bossing. Fetal brain maturation shows normal, well-defined gyration and sulcation for 34 weeks, and the lateral ventricular atrium is within normal limits at 6.9 mm.\n\nNo internal visceral herniation is present. Polyhydramnios is noted. Impression: Severe skeletal dysplasia with characteristics of thanatophoric dysplasia or achondroplasia. Significant pulmonary hypoplasia risk given the small thoracic volume."
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Aneurysm",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Fibrosis",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "absent"
+}
+],
+"diagnosis": "Cardiac MRI was performed to evaluate a 31-year-old female with a family history of unexplained sudden cardiac death. The left ventricle is normal in size, wall thickness, and function (LVEDV 118 mL, LVEF 64%). Right ventricular volumes and systolic function are also normal (RVEDV 125 mL, RVEF 55%). Multiplanar cine sequences show no regional wall motion abnormalities or focal aneurysms. Myocardial perfusion is normal, and there is no late gadolinium enhancement to suggest myocardial scar or fibrosis.\n\nImpression: Unremarkable cardiac MRI. No structural, functional, or tissue characterization findings suggestive of cardiomyopathy or arrhythmogenic disorders."
 },
 {
 "hospital": "BWH",
-"study_id": "HT-1004",
-"patient_key": "6f2afca23cf49130",
-"patient_name": "Rossi^Giulia",
-"patient_id": "BWH-11201",
-"birth_date": "20031201",
-"age_years": 22.0,
+"study_id": "HT-6100",
+"patient_key": "d203c47fa3b4c792",
+"patient_name": "Fitzgerald^Maeve",
+"patient_id": "BWH-54219",
+"birth_date": "19991111",
+"age_years": 26.0,
 "sex": "F",
 "study_date": "20251015",
 "modality": "MR",
 "body_part": "HEART",
-"diagnosis": "Comprehensive cardiovascular MRI was performed. The ventricular morphology, myocardial thickness, and cavity sizes are all within normal limits. Both right and left ventricular contractility are robust, with a calculated LVEF of 64% and RVEF of 60%. There is no evidence of late gadolinium enhancement or abnormal myocardial signal on T2 mapping.\n\nImpression: Entirely normal cardiac MRI. Normal structural anatomy and biventricular function, reassuring for clearance for athletic participation."
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "absent"
+}
+],
+"diagnosis": "Cardiac MRI evaluates a 26-year-old pregnant patient (22 weeks gestation) with suspected left ventricular non-compaction. There is prominent trabeculation of the left ventricular apex and lateral walls, with a non-compacted to compacted myocardial thickness ratio of 2.4:1 at end-diastole. The left ventricular end-diastolic volume is slightly elevated, but the global ejection fraction is preserved at 56%. No late gadolinium enhancement is present. Right ventricular morphology is unremarkable.\n\nImpression: Structural features consistent with Left Ventricular Non-Compaction (LVNC). Global systolic function remains preserved, indicating good compensation during gestation."
 },
 {
 "hospital": "BWH",
-"study_id": "HT-2883",
-"patient_key": "2053acae83d9370a",
-"patient_name": "Al-Farsi^Tariq",
-"patient_id": "BWH-82731",
-"birth_date": "19710515",
-"age_years": 54.0,
-"sex": "M",
-"study_date": "20250819",
-"modality": "MR",
-"body_part": "HEART",
-"diagnosis": "Cardiac MRI is performed for evaluation of frequent premature ventricular contractions. Left and right ventricles show normal size, morphology, and systolic function. Left ventricular ejection fraction is calculated at 62%, and right ventricular ejection fraction is 58%. No regional wall motion abnormalities are present. Late gadolinium enhancement imaging demonstrates no abnormal myocardial scar or replacement fibrosis.\n\nImpression: Completely normal cardiac MRI study. No structural heart disease or myocardial fibrosis identified as a substrate for arrhythmia."
-},
-{
-"hospital": "BWH",
-"study_id": "HT-3366",
-"patient_key": "b47d9267cadf44bd",
-"patient_name": "Kim^Ji-Young",
-"patient_id": "BWH-33456",
-"birth_date": "19910405",
-"age_years": 35.0,
+"study_id": "HT-7751",
+"patient_key": "2da3230700e182e9",
+"patient_name": "Gomez^Sofia",
+"patient_id": "BWH-14321",
+"birth_date": "19840228",
+"age_years": 42.0,
 "sex": "F",
-"study_date": "20260322",
+"study_date": "20250915",
 "modality": "MR",
 "body_part": "HEART",
-"diagnosis": "Cardiac MRI shows severe left ventricular dilation with a left ventricular end-diastolic volume index of 134 mL/m\u00b2. There is global, diffuse hypokinesis of the left ventricle with a severely depressed left ventricular ejection fraction calculated at 27%. The right ventricular chamber dimensions and function are near the lower limit of normal with an ejection fraction of 47%.\n\nLate gadolinium enhancement (LGE) sequences demonstrate mid-wall linear enhancement within the mid-to-apical septum, a pattern classic for non-ischemic dilated cardiomyopathy. Impression: Non-ischemic dilated cardiomyopathy with severe global left ventricular systolic dysfunction, severe chamber dilation, and mid-wall fibrosis."
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "absent"
 },
 {
-"hospital": "BWH",
-"study_id": "HT-8005",
-"patient_key": "afe8db4d41289810",
-"patient_name": "O'Connor^Siobhan",
-"patient_id": "BWH-99234",
-"birth_date": "19630519",
-"age_years": 62.0,
-"sex": "F",
-"study_date": "20251205",
-"modality": "MR",
-"body_part": "HEART",
-"diagnosis": "Cardiac MRI shows a regional wall motion abnormality in the LAD territory, with akinesis of the mid-to-apical anterior wall and septum. Late gadolinium enhancement (LGE) imaging reveals a subendocardial hyperenhancement involving approximately 30-40% of the wall thickness in these regions, confirming a subendocardial myocardial infarction. The global left ventricular ejection fraction is reduced at 44%.\n\nImpression: Ischemic heart disease with subendocardial myocardial infarction in the LAD distribution. Viability is preserved in the affected segments given the subendocardial nature of the enhancement."
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
 },
 {
-"hospital": "BWH",
-"study_id": "HT-9284",
-"patient_key": "fbb116150f322218",
-"patient_name": "Hassan^Farida",
-"patient_id": "BWH-49204",
-"birth_date": "19890418",
-"age_years": 36.0,
-"sex": "F",
-"study_date": "20250418",
-"modality": "MR",
-"body_part": "HEART",
-"diagnosis": "Cardiac MRI evaluates a 36-year-old female with repaired Tetralogy of Fallot who is planning a pregnancy. There is severe right ventricular outflow tract (RVOT) and pulmonary valve regurgitation, with a regurgitant fraction of 46%. The right ventricle is severely dilated (RVEDVI 154 mL/m2) with a moderately reduced RVEF of 40%. The left ventricle is normal in size and function with an LVEF of 58%.\n\nImpression: Repaired Tetralogy of Fallot with severe pulmonary regurgitation, severe right ventricular dilation, and moderate RV systolic dysfunction. These findings represent a high-risk profile for planned pregnancy, warranting close multidisciplinary consultation."
-},
-{
-"hospital": "BWH",
-"study_id": "HT-9911",
-"patient_key": "8a8bc07b026bc901",
-"patient_name": "Santos^Beatriz",
-"patient_id": "BWH-99012",
-"birth_date": "20030510",
-"age_years": 23.0,
-"sex": "F",
-"study_date": "20250615",
-"modality": "MR",
-"body_part": "HEART",
-"diagnosis": "Cardiac MRI shows normal heart size and function. The left ventricular end-diastolic volume index is 75 mL/m\u00b2 and the right ventricular end-diastolic volume index is 72 mL/m\u00b2, both of which are within normal range. Left ventricular ejection fraction is 66%, and right ventricular ejection fraction is 58%.\n\nNo regional wall motion abnormalities or focal scars are demonstrated on cine or late gadolinium enhancement (LGE) sequences. Intracardiac anatomy, including the atrial and ventricular septa, is fully intact. Impression: Normal cardiac MRI study."
+"dimension": "location",
+"value": "Left",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac MRI reveals normal dimensions of all four cardiac chambers. The left ventricular myocardium is uniform in thickness, with no localized wall thinning or hypertrophy. Left ventricular ejection fraction is normal at 61% with no regional wall motion defects. Multi-echo sequences demonstrate normal native T1 and T2 relaxation times. No evidence of myocardial infarction or scar is present on late gadolinium enhancement images.\n\nImpression: Normal cardiac MRI study. Unremarkable biventricular structure and function with no tissue-level evidence of ischemia or fibrosis."
 },
 {
 "hospital": "MGH",
-"study_id": "BR-1992",
-"patient_key": "0307269746877712",
-"patient_name": "Diallo^Amadou",
-"patient_id": "MGH-77402",
-"birth_date": "19900405",
-"age_years": 35.0,
-"sex": "M",
-"study_date": "20250811",
+"study_id": "BR-2345",
+"patient_key": "9b49173ef0888d01",
+"patient_name": "Takahashi^Yuki",
+"patient_id": "MGH-33211",
+"birth_date": "19880115",
+"age_years": 37.0,
+"sex": "F",
+"study_date": "20251120",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "MRI of the brain was performed under general headache protocol. Structural analysis of both grey and white matter reveals no parenchymal lesions, focal edema, infarcts, or vascular abnormalities. Ventricles are symmetric and typical in size for age. Paranasal sinuses and mastoids are clear.\n\nImpression: Normal MR study of the brain. No evidence of intracranial mass, chronic demyelination, or acute ischemia."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+}
+],
+"diagnosis": "MRI of the brain demonstrates multiple discrete, ovoid T2/FLAIR hyperintense lesions within the periventricular, juxtacortical, and infratentorial white matter. Several of these lesions are oriented perpendicular to the lateral ventricles, demonstrating a classic 'Dawson's fingers' appearance. Following administration of gadolinium, two of the periventricular lesions show active nodular enhancement.\n\nImpression: Demyelinating plaques scattered throughout the cerebrum and cerebellum, with active enhancement indicating areas of blood-brain barrier breakdown. The imaging features and distribution are highly characteristic of active multiple sclerosis."
 },
 {
 "hospital": "MGH",
-"study_id": "BR-3021",
-"patient_key": "c773d1e55e6a5edf",
-"patient_name": "Washington^Marcus",
-"patient_id": "MGH-60293",
-"birth_date": "19580618",
-"age_years": 67.0,
+"study_id": "BR-3119",
+"patient_key": "ef3464f0bb37c13f",
+"patient_name": "Santos^Lucas",
+"patient_id": "MGH-77890",
+"birth_date": "19810814",
+"age_years": 44.0,
 "sex": "M",
-"study_date": "20251105",
+"study_date": "20260421",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "MR imaging of the brain is performed using multiplanar, multisequence techniques. Parenchymal signal intensity is normal throughout the brain. No areas of restricted diffusion, intracranial hemorrhage, or abnormal tissue enhancement are observed. The ventricular system, basal cisterns, and cortical sulci are unremarkable for the patient's age.\n\nImpression: Normal MRI of the brain. No acute ischemic stroke, intracranial mass, or significant structural abnormality identified."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "size",
+"value": "1.9 x 2.1 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "There is a prominent, well-demarcated sellar and suprasellar mass measuring approximately 2.3 x 1.9 x 2.1 cm. The mass expands the sella turcica and abuts the optic chiasm, causing mild superior displacement and compression. The lesion demonstrates heterogeneous enhancement post-contrast with non-enhancing cystic spaces.\n\nImpression: Sellar and suprasellar mass consistent with a pituitary macroadenoma with optic chiasm displacement. Recommend formal visual field testing and endocrine workup."
+},
+{
+"hospital": "MGH",
+"study_id": "BR-4321",
+"patient_key": "032cf785bd2cd239",
+"patient_name": "Diop^Fatou",
+"patient_id": "MGH-80012",
+"birth_date": "19901111",
+"age_years": 35.0,
+"sex": "F",
+"study_date": "20251112",
+"modality": "MR",
+"body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Ischemia",
+"status": "present"
+}
+],
+"diagnosis": "MRI of the brain demonstrates normal ventricular size and preserved cortical sulcation. Hippocampal volumes are symmetric and normal for the patient's age. There are no signs of intracranial space-occupying lesion, major territorial ischemia, or abnormal enhancement.\n\nImpression: Unremarkable MRI of the brain. No structural, ischemic, or atrophic changes are visualized to account for reported transient memory lapses."
 },
 {
 "hospital": "MGH",
@@ -600,49 +2438,114 @@ window.DAB_SAMPLE = [
 "study_date": "20261112",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+}
+],
 "diagnosis": "High-resolution MRI of the brain, including dedicated views of the internal auditory canals, was performed. Brain parenchyma, cerebellar hemispheres, and brain stem are normal in appearance. No cerebellopontine angle or intracanalicular abnormalities are seen, and the cochleovestibular nerves appear intact.\n\nImpression: Normal MR examination of the brain and internal auditory canals. No structural abnormality found to account for unilateral tinnitus."
 },
 {
 "hospital": "MGH",
-"study_id": "BR-5025",
-"patient_key": "bdc1b986427bdc2a",
-"patient_name": "Diallo^Amadou",
-"patient_id": "MGH-66712",
-"birth_date": "19830225",
-"age_years": 42.0,
+"study_id": "BR-6013",
+"patient_key": "00b015088dbbe7ee",
+"patient_name": "Singh^Rajesh",
+"patient_id": "MGH-41113",
+"birth_date": "19500630",
+"age_years": 75.0,
 "sex": "M",
-"study_date": "20260710",
+"study_date": "20250830",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "Sagittal and coronal T1-weighted images obtained through the sella turcica demonstrate a well-defined hypo-enhancing lesion within the right lateral aspect of the pituitary gland, measuring 8 x 6 mm. There is mild remodeling of the sellar floor on the right, but no significant deviation of the pituitary stalk or compression of the optic chiasm.\n\nImpression: Microadenoma of the pituitary gland, measuring 8 mm. No extension into the suprasellar space or cavernous sinuses."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Atrophy",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Infarct",
+"status": "absent"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "absent"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+}
+],
+"diagnosis": "MR evaluation of the brain was performed to assess mild cognitive decline. The scan reveals generalized age-appropriate cerebral cortical volume loss with mild compensatory prominence of the sulci and ventricles. There is no focal lobar atrophy (such as disproportionate hippocampal atrophy), no acute infarcts, and no intracranial mass lesions. The deep white matter shows only minimal, non-specific T2/FLAIR hyperintensities.\n\nImpression: Age-appropriate brain morphology without evidence of focal lobar atrophy, acute ischemia, or other structural abnormalities to explain cognitive decline."
 },
 {
 "hospital": "MGH",
-"study_id": "BR-6204",
-"patient_key": "5df7e53be7a71c35",
-"patient_name": "Kowalski^Jan",
-"patient_id": "MGH-67215",
-"birth_date": "19530418",
-"age_years": 72.0,
+"study_id": "BR-7312",
+"patient_key": "06d53a2fc10122a0",
+"patient_name": "Sokolov^Dmitry",
+"patient_id": "MGH-90111",
+"birth_date": "19480321",
+"age_years": 77.0,
 "sex": "M",
-"study_date": "20250930",
+"study_date": "20251105",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "Brain MRI reveals diffuse cerebral and cerebellar volume loss with corresponding compensatory ventricular enlargement, within limits typical of the patient's age. Confluent and patchy T2/FLAIR hyperintensities are noted within the bilateral periventricular and deep white matter. No acute restricted diffusion or pathologically enhancing focal lesions are demonstrated.\n\nImpression: Moderate chronic microvascular ischemic white matter disease. Diffuse age-appropriate cerebral parenchymal volume loss. No acute intracranial abnormality is observed."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
 },
 {
-"hospital": "MGH",
-"study_id": "BR-9150",
-"patient_key": "7c92b7419d126d39",
-"patient_name": "Goldberg^Sarah",
-"patient_id": "MGH-88210",
-"birth_date": "19611005",
-"age_years": 64.0,
-"sex": "F",
-"study_date": "20250722",
-"modality": "MR",
-"body_part": "BRAIN",
-"diagnosis": "Brain MRI demonstrates a crescentic extra-axial fluid collection along the left frontoparietal convexity measuring 1.2 cm in maximal depth. The collection is heterogeneous in signal, displaying high T1 and T2 signals, indicating subacute subdural hematoma. There is resultant effacement of the adjacent cerebral sulci and a 4 mm midline shift to the right. No skull fractures or intra-axial lesions are identified.\n\nImpression: Subacute left frontoparietal subdural hematoma causing mild mass effect and minor midline shift. Close clinical monitoring is advised."
+"dimension": "finding_type",
+"value": "Midline Shift",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebral Hemisphere",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Midline",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "1.8 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "8 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+}
+],
+"diagnosis": "A large, crescent-shaped extra-axial fluid collection is demonstrated over the right cerebral hemisphere, measuring up to 1.8 cm in thickness. The collection exhibits heterogeneous signal intensity, indicating mixed chronic and subacute components. Mass effect is evident, with compression of the right lateral ventricle, effacement of adjacent sulci, and 8 mm of leftward midline shift.\n\nImpression: Large, chronic-on-subacute right subdural hematoma causing significant mass effect and midline shift. Prompt neurosurgical evaluation is recommended."
 },
 {
 "hospital": "MGH",
@@ -656,105 +2559,349 @@ window.DAB_SAMPLE = [
 "study_date": "20260810",
 "modality": "MR",
 "body_part": "BRAIN",
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Hemorrhage",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Hydrocephalus",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "absent"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "absent"
+}
+],
 "diagnosis": "Brain MRI with susceptibility-weighted imaging (SWI) demonstrates curvilinear susceptibility artifacts within the basal cisterns, sylvian fissures, and cerebral sulci, consistent with acute subarachnoid hemorrhage. No focal mass is seen, but there is mild widening of the temporal horns of the lateral ventricles suggesting early hydrocephalus.\n\nImpression: Acute subarachnoid hemorrhage within the basal cisterns and sylvian fissures. Urgent CT angiogram or MR angiogram of the head is recommended to evaluate for intracranial aneurysm rupture."
 },
 {
 "hospital": "MGH",
-"study_id": "BR-9831",
-"patient_key": "3395a9324975cbe9",
-"patient_name": "Leblanc^Pierre",
-"patient_id": "MGH-34102",
-"birth_date": "20020714",
-"age_years": 23.0,
+"study_id": "BR-9601",
+"patient_key": "03287af9253802ca",
+"patient_name": "Taylor^Robert",
+"patient_id": "MGH-80329",
+"birth_date": "19770518",
+"age_years": 48.0,
 "sex": "M",
-"study_date": "20250625",
+"study_date": "20250711",
 "modality": "MR",
 "body_part": "BRAIN",
-"diagnosis": "MR evaluation of the brain shows unremarkable intracranial anatomy. The brain parenchyma is free from focal lesions, restricted diffusion, or abnormal post-contrast enhancement. Ventricles and sulci are normal in caliber. The visual pathways, internal auditory canals, and craniovertebral junction are within normal limits.\n\nImpression: Normal MR imaging of the brain. No etiology for chronic head pain is demonstrated."
+"generic_category": "Neuro",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Mass Effect",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Midline Shift",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Midline",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Parietal Lobe",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "4.5 x 3.9 cm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+}
+],
+"diagnosis": "MR imaging of the brain reveals an infiltrative, heterogeneously enhancing mass in the left parietal lobe, measuring 4.5 x 3.9 cm, which extends across the splenium of the corpus callosum. Extensive surrounding vasogenic edema is present. There is moderate mass effect on the atrium of the left lateral ventricle, and minor midline shift to the right.\n\nImpression: Infiltrative, heterogeneously enhancing mass in the left parietal lobe with corpus callosum extension, highly suggestive of a high-grade glioma (glioblastoma). Significant surrounding vasogenic edema is present."
 },
 {
 "hospital": "MGH",
-"study_id": "FT-1182",
-"patient_key": "3d11db308a938910",
-"patient_name": "Ndiaye^Fatou",
-"patient_id": "MGH-21405",
-"birth_date": "19881115",
-"age_years": 36.0,
+"study_id": "FT-2094",
+"patient_key": "66467245cabde546",
+"patient_name": "Kim^MinJi",
+"patient_id": "MGH-33019",
+"birth_date": "19920531",
+"age_years": 33.0,
 "sex": "F",
-"study_date": "20250920",
+"study_date": "20250531",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal brain MRI at 26 weeks gestation demonstrates a severely hypoplastic cerebellar vermis and elevation of the torcular herophili. A large cystic collection in the posterior fossa is seen freely communicating with the expanded fourth ventricle, causing mass effect on the surrounding occipital bone and elevating the tentorium. Secondary bilateral ventriculomegaly is noted, with the atrial width measuring 12.0 mm bilaterally. \n\nSulcation patterns of the cerebral hemispheres are otherwise appropriate for 26 weeks, and the corpus callosum appears intact. Impression: Classical Dandy-Walker malformation with associated moderate bilateral ventriculomegaly."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "location",
+"value": "Parieto-Occipital",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "6.0 mm",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI performed at 28 weeks gestation demonstrates normal structural development of the fetus. Intracranial structures are completely intact, with a normal ventricular atrial measurement of 6.0 mm. Sulcation patterns show normal maturation for 28 weeks, including well-defined parieto-occipital and cingulate sulci. Spine, chest, and abdomen show normal development with no fluid collections or masses.\n\nImpression: Completely normal fetal MRI study demonstrating age-appropriate brain development and normal visceral anatomy at 28 weeks."
 },
 {
 "hospital": "MGH",
-"study_id": "FT-3329",
-"patient_key": "82d9a8cb1d78878d",
+"study_id": "FT-4410",
+"patient_key": "e1305a05c9dbfa46",
 "patient_name": "Kim^Ji-Yeon",
-"patient_id": "MGH-90213",
-"birth_date": "19901103",
-"age_years": 35.0,
+"patient_id": "MGH-77210",
+"birth_date": "19961214",
+"age_years": 29.0,
 "sex": "F",
-"study_date": "20260120",
+"study_date": "20260920",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI evaluated at 26 weeks gestation demonstrates complete agenesis of the corpus callosum. The lateral ventricles show a characteristic colpocephalic configuration (teardrop appearance), with prominent dilation of the occipital horns. The right lateral ventricular atrium measures 11.2 mm and the left measures 10.9 mm. A radial arrangement of the sulci (sunburst sign) is noted on sagittal and parasagittal views.\n\nNo other associated intracranial anomalies, such as interhemispheric cysts or migration defects, are identified. The fetal posterior fossa is normal. Impression: Complete agenesis of the corpus callosum with associated mild colpocephaly."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "location",
+"value": "Brainstem",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Midline",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "5.5 mm",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 36 weeks gestation demonstrates advanced fetal brain maturation. Sulcation and gyration patterns are highly appropriate for 36 weeks, with well-formed secondary and tertiary cortical folds. The ventricles are normal and symmetric, with atrial diameters of 5.5 mm. The brainstem, posterior fossa, and midline structures are completely normal.\n\nThe lungs display normal signal intensity and volume. No congenital diaphragmatic or spinal defects are visualized. Impression: Normal fetal MRI at 36 weeks gestation demonstrating excellent cortical development."
 },
 {
 "hospital": "MGH",
-"study_id": "FT-4819",
-"patient_key": "c6303ff70cf363b5",
-"patient_name": "Rodriguez^Sofia",
-"patient_id": "MGH-34281",
-"birth_date": "20030504",
-"age_years": 22.0,
+"study_id": "FT-5028",
+"patient_key": "a6fe9c6dd39b9b03",
+"patient_name": "Rossi^Francesca",
+"patient_id": "MGH-77110",
+"birth_date": "19911003",
+"age_years": 34.0,
 "sex": "F",
-"study_date": "20250905",
+"study_date": "20260905",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 20 weeks gestation shows unremarkable intracranial and abdominal anatomy. The cerebral hemispheres show initial sylvian fissure invagination, appropriate for early 20-week development. The lateral ventricular atria are symmetric, measuring 5.1 mm. The brainstem, cerebellum, spine, and abdominal viscera are intact and normal in appearance.\n\nImpression: Normal fetal MRI study showing age-appropriate central nervous system development and normal fetal visceral anatomy."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dandy-Walker Variant",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Cerebellum",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "11.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "8.8 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Moderate",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 28 weeks gestation demonstrates features consistent with a Dandy-Walker variant. There is mild hypoplasia of the inferior cerebellar vermis, and the cisterna magna is moderately dilated, measuring 11.5 mm. The fourth ventricle communicates with the posterior fossa space. The lateral ventricles are within normal limits with an atrial width of 8.8 mm. Cerebral sulcation is normal.\n\nImpression: Dandy-Walker variant characterized by mild inferior vermian hypoplasia and moderate cisterna magna enlargement. Reassuring supratentorial brain development."
 },
 {
 "hospital": "MGH",
-"study_id": "FT-8521",
-"patient_key": "b133eb24a79a3a51",
-"patient_name": "Mensah^Ama",
-"patient_id": "MGH-91104",
-"birth_date": "19991202",
-"age_years": 26.0,
+"study_id": "FT-5112",
+"patient_key": "bb0e9ef62461ffb3",
+"patient_name": "Okafor^Chioma",
+"patient_id": "MGH-22194",
+"birth_date": "19980814",
+"age_years": 27.0,
 "sex": "F",
-"study_date": "20251202",
+"study_date": "20250912",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 27 weeks gestation reveals mild asymmetric ventriculomegaly. The right lateral ventricular atrium measures 10.8 mm, while the left lateral ventricular atrium measures 10.2 mm. No associated anomalies such as periventricular nodular heterotopia or subependymal cysts are visualized. The corpus callosum is intact, and the posterior fossa structures are normal in appearance and size. Fetal spine, chest, and abdomen are unremarkable.\n\nImpression: Isolated mild bilateral ventriculomegaly at 27 weeks gestation. Follow-up imaging is recommended to monitor the ventricular dimensions."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Diaphragmatic Hernia",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Midline",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "6.0 mm",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI evaluated at 34 weeks gestation demonstrates a well-developed fetus with appropriate intracranial and visceral structures. The cerebral cortex shows advanced secondary and tertiary sulcation appropriate for 34 weeks. The lateral ventricles are completely symmetric, with atrial diameters measuring 6.0 mm. Midline structures, including the corpus callosum and optic chiasm, are normal. Fetal lungs show normal T2 signal intensity and volume relative to fetal weight, indicating no diaphragmatic hernia or masses.\n\nImpression: Unremarkable fetal MRI at 34 weeks gestation demonstrating age-appropriate neural and visceral development. No anatomical abnormalities noted."
 },
 {
 "hospital": "MGH",
-"study_id": "FT-9012",
-"patient_key": "e3808891fb13f239",
-"patient_name": "Silva^Beatriz",
-"patient_id": "MGH-88274",
-"birth_date": "19941203",
-"age_years": 31.0,
+"study_id": "FT-6112",
+"patient_key": "17a00fa87e463d5e",
+"patient_name": "Patel^Anjali",
+"patient_id": "MGH-81032",
+"birth_date": "19920119",
+"age_years": 33.0,
 "sex": "F",
-"study_date": "20260502",
+"study_date": "20251220",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 29 weeks gestation demonstrates a right-sided congenital diaphragmatic hernia (CDH). The right hepatic lobe and a segment of the gallbladder are herniated into the right hemithorax. This causes leftward mediastinal shift and compression of the heart and left lung. The total fetal lung volume is calculated at 42% of expected, indicating moderate pulmonary hypoplasia.\n\nThe fetal brain shows normal age-appropriate sulcation and normal lateral ventricles with an atrial width of 5.6 mm. Impression: Right-sided congenital diaphragmatic hernia with liver herniation and moderate fetal pulmonary hypoplasia."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Ventriculomegaly",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Bilateral",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "15.9 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "16.5 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 34 weeks gestation demonstrates severe bilateral ventriculomegaly. The lateral ventricular atria measure 16.5 mm on the left and 15.9 mm on the right. There is associated thinning of the periventricular white matter and stretching of the corpus callosum. A slight delay in the complexity of cortical sulcation is noted for 34 weeks gestation. The third ventricle is also mildly dilated.\n\nImpression: Severe bilateral ventriculomegaly with mild delayed cortical sulcation. No distinct intracranial mass or aqueductal stenosis is confidently identified."
 },
 {
 "hospital": "MGH",
-"study_id": "FT-9060",
-"patient_key": "0c863132a70b2efc",
-"patient_name": "M\u00fcller^Clara",
-"patient_id": "MGH-31010",
-"birth_date": "19830228",
-"age_years": 43.0,
+"study_id": "FT-7041",
+"patient_key": "69e70bab9641f090",
+"patient_name": "Diallo^Fatoumata",
+"patient_id": "MGH-22198",
+"birth_date": "19930228",
+"age_years": 33.0,
 "sex": "F",
-"study_date": "20260814",
+"study_date": "20260228",
 "modality": "MR",
 "body_part": "FETAL",
-"diagnosis": "Fetal MRI at 36 weeks gestation demonstrates advanced fetal development. The cerebral cortex shows deep, complex sulcation and secondary gyral patterns that are highly appropriate for a near-term infant. The lateral ventricles are completely normal with a symmetric atrial diameter of 6.5 mm. The brainstem, cerebellum, and corpus callosum are fully formed and unremarkable.\n\nImpression: Normal, mature fetal brain MRI at 36 weeks gestation showing excellent cortical development."
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "7.1 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Large",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Marked",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Fetal MRI at 25 weeks gestation demonstrates classic features of Congenital High Airway Obstruction Syndrome (CHAOS). There is severe, symmetric enlargement and hyperintensity of both fetal lungs, which are herniating out of the thoracic cavity, causing flattening and inversion of the diaphragm. The trachea is markedly dilated distal to a high-grade laryngeal obstruction. Ascites is present within the abdominal cavity, suggesting early non-immune hydrops.\n\nThe intracranial structures show normal age-appropriate gyration, and the ventricles measure 7.1 mm. Impression: Congenital High Airway Obstruction Syndrome (CHAOS) with secondary pulmonary hyperinflation, diaphragmatic inversion, and early fetal ascites. Urgent high-risk maternal-fetal medicine consultation is indicated."
 },
 {
 "hospital": "MGH",
@@ -768,76 +2915,239 @@ window.DAB_SAMPLE = [
 "study_date": "20260420",
 "modality": "MR",
 "body_part": "FETAL",
+"generic_category": "OB/Fetal",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Lateral Ventricle",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "10.1 mm",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "absent"
+}
+],
 "diagnosis": "Fetal MRI at 30 weeks gestation demonstrates partial agenesis of the corpus callosum. The anterior body and genu are present, but the posterior body and splenium are absent. There is mild dilatation of the posterior horns of the lateral ventricles (atrial measurement 10.1 mm), typical of colpocephaly. The parenchymal migration and gyral structures are otherwise normal.\n\nImpression: Partial agenesis of the corpus callosum with associated mild colpocephaly. No other congenital anomalies visualized."
 },
 {
 "hospital": "MGH",
-"study_id": "HT-1234",
-"patient_key": "29813bf9f35ba5f8",
-"patient_name": "Svensson^Lars",
-"patient_id": "MGH-21092",
-"birth_date": "19780515",
-"age_years": 48.0,
-"sex": "M",
-"study_date": "20260215",
-"modality": "MR",
-"body_part": "HEART",
-"diagnosis": "Cardiac MRI reveals symmetric thickening of the left ventricular walls (septal thickness 15 mm) with diffuse, subendocardial late gadolinium enhancement (LGE) sparing the apex, a pattern highly characteristic of cardiac amyloidosis. There is associated thickening of the interatrial septum and right ventricular free wall. Left ventricular systolic function is mildly reduced (LVEF 48%) with a restrictive filling pattern.\n\nImpression: Findings are strongly indicative of cardiac amyloidosis, characterized by diffuse subendocardial LGE, bi-atrial enlargement, and concentric myocardial thickening."
-},
-{
-"hospital": "MGH",
-"study_id": "HT-3842",
-"patient_key": "5665033d916e26c2",
-"patient_name": "O'Connor^Deirdre",
-"patient_id": "MGH-61048",
-"birth_date": "19681014",
-"age_years": 57.0,
-"sex": "F",
-"study_date": "20251114",
-"modality": "MR",
-"body_part": "HEART",
-"diagnosis": "Cardiac magnetic resonance imaging demonstrates normal left and right ventricular chamber dimensions and preserved global systolic function. The left ventricular end-diastolic volume is 135 mL, and the ejection fraction is calculated at 62%. The right ventricular ejection fraction is also normal at 58% without regional wall motion abnormalities. Myocardial perfusion sequences show no inducible ischemia, and late gadolinium enhancement (LGE) imaging reveals no myocardial scarring, fibrosis, or past injury.\n\nImpression: Normal cardiac MRI study. No evidence of cardiomyopathy, valvular dysfunction, or myocardial scarring."
-},
-{
-"hospital": "MGH",
-"study_id": "HT-6019",
-"patient_key": "b729d60be2fc5295",
-"patient_name": "Rodriguez^Mateo",
-"patient_id": "MGH-31048",
-"birth_date": "19920725",
-"age_years": 33.0,
-"sex": "M",
-"study_date": "20260514",
-"modality": "MR",
-"body_part": "HEART",
-"diagnosis": "Cardiac MRI evaluates for possible arrhythmogenic cardiomyopathy. The right ventricle is severely dilated (RVEDVI 130 mL/m\u00b2) with localized dyskinesis and micro-aneurysm formation within the right ventricular outflow tract (RVOT) and apical free wall. Right ventricular ejection fraction is significantly reduced at 34%.\n\nHigh-resolution T1-weighted sequences demonstrate intramyocardial fatty infiltration of the right ventricular free wall, confirmed on fat-saturated sequences. Focal late gadolinium enhancement is noted in the RV free wall. Left ventricular size and systolic function are normal (LVEF 59%). Impression: Right ventricular structural and functional abnormalities characteristic of Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)."
-},
-{
-"hospital": "MGH",
-"study_id": "HT-6101",
-"patient_key": "4151ccd3c88fcca5",
-"patient_name": "Gomez^Sofia",
-"patient_id": "MGH-84721",
-"birth_date": "19961102",
+"study_id": "HT-4482",
+"patient_key": "057bb8887212c21f",
+"patient_name": "Patel^Aarav",
+"patient_id": "MGH-54019",
+"birth_date": "19970115",
 "age_years": 29.0,
-"sex": "F",
-"study_date": "20251105",
+"sex": "M",
+"study_date": "20260601",
 "modality": "MR",
 "body_part": "HEART",
-"diagnosis": "Cardiac MRI shows severe asymmetric septal hypertrophy, with the maximal septal wall thickness measuring 22 mm. There is systolic anterior motion (SAM) of the anterior mitral valve leaflet, resulting in a dynamic left ventricular outflow tract (LVOT) obstruction and moderate mitral regurgitation. Left ventricular ejection fraction is hyperdynamic at 75%. Late gadolinium enhancement imaging shows patchy mid-myocardial hyperenhancement at the RV-LV insertion points, typical for hypertrophic cardiomyopathy.\n\nImpression: Findings strongly characteristic of hypertrophic obstructive cardiomyopathy (HOCM) with hyperdynamic LV function and patchy focal fibrosis."
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Fibrosis",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Ischemic",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac magnetic resonance imaging demonstrates normal anatomical and functional parameters of both ventricles. Left ventricular ejection fraction is computed at 61% and right ventricular ejection fraction is 54%. Myocardial perfusion imaging is uniform under rest conditions. Late gadolinium enhancement (LGE) imaging is negative, with no evidence of replacement fibrosis, inflammatory changes, or acute ischemic injury.\n\nImpression: Normal cardiac MRI study showing no structural, regional kinetic, or delayed enhancement abnormalities. No evidence of myocardial dysfunction or structural disease."
 },
 {
 "hospital": "MGH",
-"study_id": "HT-6712",
-"patient_key": "3a78e1f3b9ab3181",
-"patient_name": "Papadopoulos^Dimitris",
-"patient_id": "MGH-50212",
-"birth_date": "19901212",
-"age_years": 35.0,
+"study_id": "HT-5022",
+"patient_key": "77c140688beec0b4",
+"patient_name": "Okonkwo^Chinedu",
+"patient_id": "MGH-38411",
+"birth_date": "19880822",
+"age_years": 37.0,
 "sex": "M",
-"study_date": "20251030",
+"study_date": "20260212",
 "modality": "MR",
 "body_part": "HEART",
-"diagnosis": "Cardiac MRI shows mild dilation of the left ventricle with a mildly reduced ejection fraction of 52%. T2-weighted edema imaging (T2 mapping) reveals elevated relaxation times and patchy areas of hyperintensity in the lateral and inferolateral free walls. Corresponding late gadolinium enhancement (LGE) images demonstrate patchy, subepicardial and mid-myocardial enhancement in the same regions, sparing the subendocardium. This distribution pattern is highly characteristic of acute inflammatory injury.\n\nImpression: Acute myocarditis based on modified Lake Louise criteria, demonstrating active myocardial edema and corresponding subepicardial late gadolinium enhancement in the lateral and inferolateral walls."
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Fibrosis",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+}
+],
+"diagnosis": "A comprehensive cardiac MRI protocol was performed evaluating cardiac structure and function. Multiplanar steady-state free precession (SSFP) cine imaging demonstrates normal left and right ventricular chamber sizes, wall thicknesses, and systolic function. The calculated left ventricular ejection fraction is 62%, and the right ventricular ejection fraction is 56%. There is no evidence of regional wall motion abnormalities, myocardial edema on T2-weighted imaging, or pathological myocardial fibrosis on late gadolinium enhancement (LGE) sequences.\n\nImpression: Entirely normal cardiac MRI examination showing normal biventricular size and systolic function, and no evidence of focal myocardial scar, edema, or infiltration."
+},
+{
+"hospital": "MGH",
+"study_id": "HT-5063",
+"patient_key": "5d723b2dc1dd6155",
+"patient_name": "Kim^Ji-Yeon",
+"patient_id": "MGH-74011",
+"birth_date": "20011019",
+"age_years": 24.0,
+"sex": "F",
+"study_date": "20250918",
+"modality": "MR",
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Edema",
+"status": "absent"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Biventricular",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Left",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "absent"
+}
+],
+"diagnosis": "Cardiac MRI shows normal internal cardiac architecture with preserved biventricular systolic parameters. The left ventricular ejection fraction is 65% and the right ventricular ejection fraction is 60%. Myocardial thickness is uniform, and there are no focal hypokinetic or dyskinetic wall segments. Valves show normal excursion.\n\nThere is no evidence of myocardial edema on T2 maps, and late gadolinium enhancement is completely absent. Visualized major thoracic vessels, including the pulmonary trunk and aorta, are normal. Impression: Completely normal cardiac MRI study."
+},
+{
+"hospital": "MGH",
+"study_id": "HT-7193",
+"patient_key": "d26958d41c795b85",
+"patient_name": "Hansen^Kristina",
+"patient_id": "MGH-34902",
+"birth_date": "20000412",
+"age_years": 25.0,
+"sex": "F",
+"study_date": "20260312",
+"modality": "MR",
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Fibrosis",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Late Gadolinium Enhancement",
+"status": "absent"
+},
+{
+"dimension": "location",
+"value": "Biventricular",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Focal",
+"status": "present"
+}
+],
+"diagnosis": "Cardiac MRI shows excellent biventricular systolic function with normal wall thickness and chamber sizes. No wall motion abnormalities are identified. No late gadolinium enhancement is present to suggest focal myocardial scar or fibrosis. Visualized portion of the great vessels and heart valves appear normal.\n\nImpression: Normal cardiac MRI study. Left ventricular ejection fraction is 63%, and right ventricular ejection fraction is 59%."
+},
+{
+"hospital": "MGH",
+"study_id": "HT-9321",
+"patient_key": "b82541df5587a3e8",
+"patient_name": "Jensen^Freja",
+"patient_id": "MGH-34729",
+"birth_date": "19940527",
+"age_years": 31.0,
+"sex": "F",
+"study_date": "20250527",
+"modality": "MR",
+"body_part": "HEART",
+"generic_category": "Cardiac",
+"findings": [
+{
+"dimension": "finding_type",
+"value": "Dilation",
+"status": "present"
+},
+{
+"dimension": "finding_type",
+"value": "Valvular Regurgitation",
+"status": "present"
+},
+{
+"dimension": "location",
+"value": "Right",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Mild",
+"status": "present"
+},
+{
+"dimension": "size",
+"value": "Severe",
+"status": "present"
+}
+],
+"diagnosis": "Evaluation of this adult with a history of pediatric Tetralogy of Fallot repair reveals severe right ventricular dilation (RVEDVI of 155 mL/m\u00b2) and severe, free pulmonary regurgitation with a regurgitant fraction of 46% calculated via phase-contrast flow analysis. The right ventricular ejection fraction is mildly reduced at 44%. The patch closure of the ventricular septal defect (VSD) appears intact with no residual shunt.\n\nImpression: Status post remote repair of Tetralogy of Fallot, now demonstrating severe pulmonary regurgitation and severe right ventricular dilation. This profile is key in determining timing for pulmonary valve replacement."
 }
 ];

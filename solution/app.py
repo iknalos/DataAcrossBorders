@@ -83,7 +83,8 @@ def audit(user: dict, endpoint: str, params: dict, result_count: int, flags: str
     conn.close()
 
 
-def build_where(conn, q, age_min, age_max, sex, modality, body_part, hospital):
+def build_where(conn, q, age_min, age_max, sex, modality, body_part, hospital,
+                finding=None, finding_status="present", category=None):
     """Returns (from_sql, where_sql, params, expanded_terms).
 
     When q is present we join the FTS table so BM25 ranking is available; the
@@ -104,10 +105,23 @@ def build_where(conn, q, age_min, age_max, sex, modality, body_part, hospital):
         ("s.modality = ?", modality.upper() if modality else None),
         ("s.body_part = ?", body_part.upper() if body_part else None),
         ("s.hospital = ?", hospital.upper() if hospital else None),
+        ("s.generic_category = ?", category or None),
     ]:
         if value is not None:
             where.append(clause)
             params.append(value)
+
+    # Status-aware entity search: match a structured finding by status. Default
+    # 'present' means a report that RULES OUT the finding ("no hydrocephalus",
+    # stored as status='absent') will NOT match — the negation-safe behavior.
+    if finding:
+        sub = "s.study_key IN (SELECT study_key FROM finding_tags WHERE value_lc LIKE ?"
+        params.append(f"%{finding.lower()}%")
+        if finding_status and finding_status != "any":
+            sub += " AND status = ?"
+            params.append(finding_status)
+        where.append(sub + ")")
+
     where_sql = (" WHERE " + " AND ".join(where)) if where else ""
     return from_sql, where_sql, params, expanded
 
@@ -161,12 +175,18 @@ def discover(
     modality: str | None = None,
     body_part: str | None = None,
     hospital: str | None = None,
+    finding: str | None = None,
+    finding_status: str = "present",
+    category: str | None = None,
 ):
     """Tier 1 — Beacon-style cohort discovery. Returns only existence and counts,
     never records, with k-anonymous suppression that is safe against differencing."""
     conn = clinical_db()
     from_sql, where_sql, params, expanded = build_where(
-        conn, q, age_min, age_max, sex, modality, body_part, hospital)
+        conn, q, age_min, age_max, sex, modality, body_part, hospital, finding, finding_status, category)
+    probe = dict(q=q, age_min=age_min, age_max=age_max, sex=sex, modality=modality,
+                 body_part=body_part, hospital=hospital, finding=finding,
+                 finding_status=finding_status if finding else None, category=category)
 
     total = conn.execute(f"SELECT COUNT(*) {from_sql}{where_sql}", params).fetchone()[0]
 
@@ -183,10 +203,8 @@ def discover(
     conn.close()
 
     # Differencing-aware auditing: flag overlapping successive discover queries.
-    flags = differencing_flag(user, dict(q=q, age_min=age_min, age_max=age_max, sex=sex,
-                                         modality=modality, body_part=body_part, hospital=hospital))
-    audit(user, "/api/discover", dict(q=q, age_min=age_min, age_max=age_max, sex=sex,
-          modality=modality, body_part=body_part, hospital=hospital), total, flags)
+    flags = differencing_flag(user, probe)
+    audit(user, "/api/discover", probe, total, flags)
 
     return {
         "tier": "discovery",
@@ -229,22 +247,37 @@ def search(
     modality: str | None = None,
     body_part: str | None = None,
     hospital: str | None = None,
+    finding: str | None = None,
+    finding_status: str = "present",
+    category: str | None = None,
     limit: int = Query(default=25, le=1000),
     offset: int = 0,
     format: str = Query(default="json", pattern="^(json|csv)$"),
 ):
     """Tier 2 — record-level search. Query is medically expanded and BM25-ranked.
-    PII exposure depends on role: researcher (pseudonym + scrubbed text),
-    clinician (name + birth year), admin (everything). CSV honors the same redaction."""
+    The optional `finding` filter is status-aware (default 'present'), so reports
+    that RULE OUT a finding won't be returned as matches. PII exposure depends on
+    role: researcher (pseudonym + scrubbed text), clinician (name + birth year),
+    admin (everything). CSV honors the same redaction."""
     role = user["role"]
     conn = clinical_db()
     from_sql, where_sql, params, expanded = build_where(
-        conn, q, age_min, age_max, sex, modality, body_part, hospital)
+        conn, q, age_min, age_max, sex, modality, body_part, hospital, finding, finding_status, category)
 
     total = conn.execute(f"SELECT COUNT(*) {from_sql}{where_sql}", params).fetchone()[0]
     order = "ORDER BY bm25(studies_fts)" if q and "MATCH" in where_sql else "ORDER BY s.hospital, s.study_id"
     rows = conn.execute(
         f"SELECT s.* {from_sql}{where_sql} {order} LIMIT ? OFFSET ?", params + [limit, offset]).fetchall()
+
+    # Attach the structured finding tags for the returned studies (one extra query).
+    tags_by_study: dict[int, list] = {}
+    if rows:
+        ph = ",".join("?" * len(rows))
+        for t in conn.execute(
+            f"SELECT study_key, dimension, value, status FROM finding_tags "
+            f"WHERE study_key IN ({ph}) ORDER BY dimension, value", [r["study_key"] for r in rows]):
+            tags_by_study.setdefault(t["study_key"], []).append(
+                {"dimension": t["dimension"], "value": t["value"], "status": t["status"]})
     conn.close()
 
     results = []
@@ -261,6 +294,8 @@ def search(
             "study_date": display_date(r["study_date"]),
             "modality": r["modality"],
             "body_part": r["body_part"],
+            "category": r["generic_category"],
+            "findings": tags_by_study.get(r["study_key"], []),
             "diagnosis": diagnosis,
         })
 
@@ -284,17 +319,23 @@ def search(
                                   "patient_id": p["patient_id"], "birth_date": display_date(p["birth_date"])}
 
     audit(user, f"/api/search ({format})", dict(q=q, age_min=age_min, age_max=age_max, sex=sex,
-          modality=modality, body_part=body_part, hospital=hospital, limit=limit, offset=offset), len(results))
+          modality=modality, body_part=body_part, hospital=hospital, finding=finding,
+          finding_status=finding_status if finding else None, category=category,
+          limit=limit, offset=offset), len(results))
 
     if format == "csv":
         pii_cols = {"researcher": ["pseudonym"], "clinician": ["name", "patient_id", "birth_year"],
                     "admin": ["name", "patient_id", "birth_date"]}[role]
-        cols = ["hospital", "study_id", *pii_cols, "age", "sex", "study_date", "modality", "body_part", "diagnosis"]
+        cols = ["hospital", "study_id", *pii_cols, "age", "sex", "study_date", "modality",
+                "body_part", "category", "findings_present", "diagnosis"]
         buf = io.StringIO()
         writer = csv.DictWriter(buf, fieldnames=cols, extrasaction="ignore")
         writer.writeheader()
         for res in results:
-            writer.writerow({**{k: v for k, v in res.items() if k != "patient"}, **res["patient"]})
+            present = "; ".join(f"{t['value']}" for t in res["findings"]
+                                if t["dimension"] == "finding_type" and t["status"] == "present")
+            writer.writerow({**{k: v for k, v in res.items() if k not in ("patient", "findings")},
+                             "findings_present": present, **res["patient"]})
         return Response(content=buf.getvalue(), media_type="text/csv",
                         headers={"Content-Disposition": 'attachment; filename="dab_export.csv"'})
 
@@ -334,8 +375,8 @@ def verify(user: dict = Depends(current_user)):
 
     hashes, bad = [], 0
     for r in conn.execute("SELECT hospital, study_id, study_uid, patient_key, age_years, sex, "
-                          "study_date, modality, body_part, diagnosis, row_hash FROM studies"):
-        canon = "\x1f".join(str(x) for x in r[:10])
+                          "study_date, modality, body_part, generic_category, diagnosis, row_hash FROM studies"):
+        canon = "\x1f".join(str(x) for x in r[:11])
         h = hashlib.sha256(canon.encode()).hexdigest()
         hashes.append(h)
         if h != r["row_hash"]:
@@ -343,6 +384,11 @@ def verify(user: dict = Depends(current_user)):
     checks["row_hashes_valid"] = (bad == 0)
     digest = hashlib.sha256("".join(sorted(hashes)).encode()).hexdigest()
     checks["dataset_digest_matches_manifest"] = (m is not None and digest == m["dataset_digest"])
+
+    tag_orphans = conn.execute(
+        "SELECT COUNT(*) FROM finding_tags t LEFT JOIN studies s ON s.study_key=t.study_key "
+        "WHERE s.study_key IS NULL").fetchone()[0]
+    checks["finding_tags_referential_integrity"] = (tag_orphans == 0)
     conn.close()
 
     return {

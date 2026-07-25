@@ -23,11 +23,22 @@ vault.row_factory = sqlite3.Row
 
 picked: dict[int, sqlite3.Row] = {}
 
-# A few records per seed term (spread across hospitals).
+# Seed on structured findings so the sample contains BOTH present and ruled-out
+# examples of key findings — this is what makes the negation demo work client-side.
+SEED_FINDINGS = ["Hydrocephalus", "Hemorrhage", "Infarct", "Stenosis", "Aneurysm",
+                 "Mass Effect", "Cardiomegaly", "Growth Restriction", "Edema"]
+for value in SEED_FINDINGS:
+    for status, n in (("present", 3), ("absent", 2)):
+        for r in clinical.execute(
+            "SELECT s.* FROM studies s JOIN finding_tags t ON t.study_key=s.study_key "
+            "WHERE t.value_lc LIKE ? AND t.status=? LIMIT ?", (f"%{value.lower()}%", status, n)):
+            picked[r["study_key"]] = r
+
+# A few records per free-text seed term too (keyword-search variety).
 for term in SEED_TERMS:
     for r in clinical.execute(
         "SELECT s.* FROM studies_fts f JOIN studies s ON s.study_key=f.rowid "
-        "WHERE studies_fts MATCH ? LIMIT 3", (f'"{term}"',)):
+        "WHERE studies_fts MATCH ? LIMIT 2", (f'"{term}"',)):
         picked[r["study_key"]] = r
 
 # Fill to a balanced ~20 per hospital.
@@ -42,6 +53,10 @@ vkeys = {r["patient_key"]: r for r in vault.execute("SELECT * FROM patients")}
 sample = []
 for r in picked.values():
     p = vkeys[r["patient_key"]]
+    findings = [{"dimension": t["dimension"], "value": t["value"], "status": t["status"]}
+                for t in clinical.execute(
+                    "SELECT dimension, value, status FROM finding_tags WHERE study_key=? ORDER BY dimension, value",
+                    (r["study_key"],))]
     sample.append({
         "hospital": r["hospital"],
         "study_id": r["study_id"],
@@ -54,6 +69,8 @@ for r in picked.values():
         "study_date": r["study_date"],
         "modality": r["modality"],
         "body_part": r["body_part"],
+        "generic_category": r["generic_category"],
+        "findings": findings,
         "diagnosis": r["diagnosis"],
     })
 

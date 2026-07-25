@@ -175,3 +175,49 @@ def test_differencing_probe_is_flagged():
     client.get("/api/discover?body_part=HEART&hospital=MGH&sex=F", headers=hdrs)
     entries = client.get("/api/audit?limit=1", headers=auth("admin")).json()["entries"]
     assert entries[0]["flags"] == "possible-differencing"
+
+
+# --------------------------------------------------------------------------- #
+# Structured findings: negation-aware entity search + category (the LLM labels)
+# --------------------------------------------------------------------------- #
+def test_finding_present_excludes_ruled_out():
+    hdrs = auth("res.kim")
+    present = client.get("/api/discover?finding=hydrocephalus&finding_status=present", headers=hdrs).json()
+    absent = client.get("/api/discover?finding=hydrocephalus&finding_status=absent", headers=hdrs).json()
+    keyword = client.get("/api/discover?q=hydrocephalus", headers=hdrs).json()
+    # both statuses exist in the data, and keyword search is far broader (matches negations)
+    assert present["exists"] and absent["exists"]
+    assert isinstance(present["total_matches"], int) and isinstance(keyword["total_matches"], int)
+    # the core guarantee: present-only is a strict subset of "any mention"
+    assert present["total_matches"] < keyword["total_matches"]
+
+
+def test_finding_default_status_is_present():
+    hdrs = auth("res.kim")
+    default = client.get("/api/discover?finding=hydrocephalus", headers=hdrs).json()["total_matches"]
+    explicit = client.get("/api/discover?finding=hydrocephalus&finding_status=present", headers=hdrs).json()["total_matches"]
+    assert default == explicit
+
+
+def test_search_returns_category_and_finding_tags():
+    r = client.get("/api/search?finding=hydrocephalus&finding_status=present&limit=1", headers=auth("res.kim")).json()
+    rec = r["results"][0]
+    assert rec["category"] in ("Neuro", "Cardiac", "OB/Fetal")
+    ft = [t for t in rec["findings"] if t["dimension"] == "finding_type"]
+    assert any("hydrocephalus" in t["value"].lower() and t["status"] == "present" for t in ft)
+
+
+def test_category_filter():
+    r = client.get("/api/discover?category=Cardiac", headers=auth("res.kim")).json()
+    assert r["total_matches"] == 900   # 300 per hospital
+
+
+def test_csv_includes_category_and_findings():
+    r = client.get("/api/search?finding=hydrocephalus&limit=1&format=csv", headers=auth("res.kim"))
+    header = r.text.splitlines()[0]
+    assert "category" in header and "findings_present" in header
+
+
+def test_verify_includes_tag_referential_integrity():
+    checks = client.get("/api/verify", headers=auth("admin")).json()["checks"]
+    assert checks["finding_tags_referential_integrity"] is True

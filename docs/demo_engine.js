@@ -124,9 +124,19 @@
     const num = (k) => p.get(k) !== null ? parseFloat(p.get(k)) : null;
     const eq  = (k) => p.get(k) ? p.get(k).toUpperCase() : null;
     const amin=num("age_min"), amax=num("age_max"), sex=eq("sex"), mod=eq("modality"), bp=eq("body_part"), hosp=eq("hospital");
+    const category = p.get("category");
     rows = rows.filter(({r}) =>
       (amin===null || r.age_years>=amin) && (amax===null || r.age_years<=amax) &&
-      (!sex || r.sex===sex) && (!mod || r.modality===mod) && (!bp || r.body_part===bp) && (!hosp || r.hospital===hosp));
+      (!sex || r.sex===sex) && (!mod || r.modality===mod) && (!bp || r.body_part===bp) &&
+      (!hosp || r.hospital===hosp) && (!category || r.generic_category===category));
+
+    // Status-aware entity search: default 'present' so ruled-out findings don't match.
+    const finding = p.get("finding");
+    if (finding) {
+      const fl = finding.toLowerCase(), st = p.get("finding_status") || "present";
+      rows = rows.filter(({r}) => (r.findings||[]).some(t =>
+        t.value.toLowerCase().includes(fl) && (st==="any" || t.status===st)));
+    }
     return {rows, expanded: exp.added, ranked: !!q};
   }
 
@@ -198,16 +208,20 @@
         else if (role === "clinician") patient = {name: displayName(r.patient_name), patient_id: r.patient_id, birth_year: r.birth_date.slice(0,4)};
         else patient = {name: displayName(r.patient_name), patient_id: r.patient_id, birth_date: displayDate(r.birth_date)};
         return {hospital:r.hospital, study_id:r.study_id, patient, age: displayAge(capAge(r.age_years)),
-                sex:r.sex, study_date: displayDate(r.study_date), modality:r.modality, body_part:r.body_part, diagnosis:diag};
+                sex:r.sex, study_date: displayDate(r.study_date), modality:r.modality, body_part:r.body_part,
+                category: r.generic_category, findings: r.findings||[], diagnosis:diag};
       });
       record("/api/search ("+(format||"json")+")", paramsObj(p), results.length, "");
       if (format === "csv") {
-        const cols = role==="researcher" ? ["hospital","study_id","pseudonym","age","sex","study_date","modality","body_part","diagnosis"]
-                   : role==="clinician"  ? ["hospital","study_id","name","patient_id","birth_year","age","sex","study_date","modality","body_part","diagnosis"]
-                   :                        ["hospital","study_id","name","patient_id","birth_date","age","sex","study_date","modality","body_part","diagnosis"];
+        const pii = role==="researcher" ? ["pseudonym"] : role==="clinician" ? ["name","patient_id","birth_year"] : ["name","patient_id","birth_date"];
+        const cols = ["hospital","study_id",...pii,"age","sex","study_date","modality","body_part","category","findings_present","diagnosis"];
         const esc = v => `"${String(v==null?"":v).replace(/"/g,'""')}"`;
         const lines = [cols.join(",")];
-        for (const res of results) { const row = {...res, ...res.patient}; lines.push(cols.map(c=>esc(row[c])).join(",")); }
+        for (const res of results) {
+          const present = (res.findings||[]).filter(t=>t.dimension==="finding_type"&&t.status==="present").map(t=>t.value).join("; ");
+          const row = {...res, ...res.patient, findings_present: present};
+          lines.push(cols.map(c=>esc(row[c])).join(","));
+        }
         return lines.join("\n");
       }
       return {tier:"records", role, total_matches: total, returned: results.length, offset, expanded_terms: expanded, results};

@@ -62,6 +62,22 @@ more relevant results in the literature.
 - **BM25 relevance ranking** so the best matches sort first, with structured filters
   (normalized age, sex, modality, body part, hospital, date) as index-backed predicates.
 
+### 3b. Structured entity search + negation (LLM FindingTags)
+
+The organizers later published labeled data (`LLM_output/`) adding `GenericCategory`
+and `FindingTags` — structured entities (`{dimension, value, status}`) extracted from
+each report. We ingest these into a `finding_tags` table and expose a **status-aware
+`finding` filter**.
+
+This fixes a fundamental flaw in keyword search: a report saying *"no hydrocephalus"*
+matches a keyword search for `hydrocephalus`. On our data, keyword `hydrocephalus`
+returns ~410 reports, but only ~31 patients actually have it — the rest are negations
+and differential mentions. The `finding` filter defaults to `status=present`, so
+ruled-out cases are excluded; `absent` and `any` are available when a researcher
+explicitly wants confirmed-negative or all-mention cohorts. This is real clinical
+entity search, not string matching, and it is the difference between a safe result and
+a misleading one.
+
 ## Data integrity (cross-cutting)
 
 Added in v2, because "the data is correct and untampered" underpins all three problems:

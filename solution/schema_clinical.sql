@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS studies (
     study_date  TEXT NOT NULL,                -- YYYYMMDD
     modality    TEXT NOT NULL,                -- MR / CT / US ...
     body_part   TEXT NOT NULL,                -- BRAIN / HEART / FETAL
+    generic_category TEXT NOT NULL DEFAULT '', -- LLM label: Neuro / Cardiac / OB/Fetal
     diagnosis   TEXT NOT NULL,                -- full radiology report text
     row_hash    TEXT NOT NULL,                -- sha256 of canonical fields (tamper/corruption check)
     UNIQUE (hospital, study_id)
@@ -27,6 +28,23 @@ CREATE INDEX IF NOT EXISTS idx_studies_modality  ON studies (modality);
 CREATE INDEX IF NOT EXISTS idx_studies_age       ON studies (age_years);
 CREATE INDEX IF NOT EXISTS idx_studies_hospital  ON studies (hospital);
 CREATE INDEX IF NOT EXISTS idx_studies_patient   ON studies (patient_key);
+CREATE INDEX IF NOT EXISTS idx_studies_category  ON studies (generic_category);
+
+-- Structured clinical entities extracted from each report (the LLM FindingTags).
+-- status distinguishes a finding that is PRESENT from one explicitly ruled out
+-- (absent) or uncertain — the basis for negation-aware, non-misleading search.
+CREATE TABLE IF NOT EXISTS finding_tags (
+    id          INTEGER PRIMARY KEY,
+    study_key   INTEGER NOT NULL REFERENCES studies(study_key),
+    dimension   TEXT NOT NULL,                -- location / finding_type / size
+    value       TEXT NOT NULL,                -- e.g. 'Intracranial Hemorrhage', 'Left Ventricle', '1.8 cm'
+    value_lc    TEXT NOT NULL,                -- lowercased value for case-insensitive lookup
+    status      TEXT NOT NULL                 -- present / absent / uncertain
+);
+
+CREATE INDEX IF NOT EXISTS idx_tags_study   ON finding_tags (study_key);
+CREATE INDEX IF NOT EXISTS idx_tags_lookup  ON finding_tags (dimension, value_lc, status);
+CREATE INDEX IF NOT EXISTS idx_tags_value   ON finding_tags (value_lc, status);
 
 -- FTS5 inverted index over the diagnosis text (the "indexing" answer).
 CREATE VIRTUAL TABLE IF NOT EXISTS studies_fts USING fts5(
