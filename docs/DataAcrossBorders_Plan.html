@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DataAcrossBorders - Project Analysis and Build Plan</title>
+<style>
+  @page { size: Letter; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #1a2332;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    margin: 0;
+  }
+  h1 { font-size: 21pt; color: #0b3d66; margin: 0 0 2px 0; }
+  .subtitle { color: #5a6a7a; font-size: 11pt; margin-bottom: 4px; }
+  .meta { color: #8a97a5; font-size: 9pt; margin-bottom: 18px; border-bottom: 2px solid #0b3d66; padding-bottom: 10px; }
+  h2 {
+    font-size: 13.5pt; color: #0b3d66; border-bottom: 1px solid #c8d4e0;
+    padding-bottom: 4px; margin-top: 24px; margin-bottom: 10px;
+  }
+  h3 { font-size: 11.5pt; color: #17466e; margin: 14px 0 6px 0; }
+  p { margin: 6px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 12px 0; font-size: 9.5pt; }
+  th { background: #0b3d66; color: #fff; text-align: left; padding: 6px 8px; }
+  td { border: 1px solid #d4dce4; padding: 5px 8px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f4f7fa; }
+  code {
+    font-family: Consolas, monospace; background: #eef2f6; padding: 1px 4px;
+    border-radius: 3px; font-size: 9pt; color: #b03050;
+  }
+  pre {
+    font-family: Consolas, monospace; background: #f4f7fa; border: 1px solid #d4dce4;
+    border-radius: 5px; padding: 10px 12px; font-size: 8.5pt; line-height: 1.4;
+    overflow: hidden; white-space: pre-wrap;
+  }
+  pre code { background: none; color: #1a2332; padding: 0; }
+  ul, ol { margin: 6px 0; padding-left: 22px; }
+  li { margin: 3px 0; }
+  .box {
+    background: #eef6ee; border-left: 4px solid #3d8b40; padding: 8px 12px;
+    margin: 10px 0; border-radius: 0 5px 5px 0;
+  }
+  .warn {
+    background: #fdf3e7; border-left: 4px solid #d9822b; padding: 8px 12px;
+    margin: 10px 0; border-radius: 0 5px 5px 0;
+  }
+  .crit {
+    background: #fbeaea; border-left: 4px solid #c0392b; padding: 8px 12px;
+    margin: 10px 0; border-radius: 0 5px 5px 0;
+  }
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 8pt; font-weight: 600; color: #fff; }
+  .p0 { background: #c0392b; } .p1 { background: #d9822b; } .p2 { background: #2874a6; } .p3 { background: #7d8a96; }
+  .pagebreak { page-break-before: always; }
+  .footer-note { margin-top: 26px; padding-top: 8px; border-top: 1px solid #c8d4e0; color: #8a97a5; font-size: 8.5pt; }
+</style>
+</head>
+<body>
+
+<h1>DataAcrossBorders</h1>
+<div class="subtitle">Project Analysis &amp; Build Plan — Federated Medical Imaging Search</div>
+<div class="meta">Repository: iknalos/DataAcrossBorders &nbsp;|&nbsp; Prepared: July 25, 2026 &nbsp;|&nbsp; Event: The Open Accelerator Healthcare Hackathon — Track 1</div>
+
+<h2>1. Executive Summary</h2>
+<p>
+The repository currently contains only the <strong>hackathon boilerplate</strong>: a deliberately minimal FastAPI
+application that simulates one siloed hospital database node. Run three times on different ports, it mimics three
+disconnected Boston hospitals (BCH, MGH, BWH), each holding 900 synthetic radiology study records with
+<strong>no authentication, no search, and fully exposed patient PII</strong>.
+</p>
+<p>
+<strong>Nothing of "your solution" exists yet.</strong> The entire challenge deliverable — a federated search layer
+with privacy protection and access control that sits on top of the three nodes — still needs to be built. This
+document assesses what is provided, defines exactly what is missing, proposes an architecture, and breaks the work
+into a prioritized, hackathon-sized task list.
+</p>
+
+<div class="box">
+<strong>The one-sentence goal:</strong> Build an aggregator service + web UI that lets an authorized clinician search
+all three hospitals at once (e.g., "hydrocephalus in patients under 10") while redacting PII according to the
+requester's role, and log every access.
+</div>
+
+<h2>2. What the Repo Contains Today</h2>
+<table>
+<tr><th>File</th><th>Purpose</th><th>State</th></tr>
+<tr><td><code>main.py</code></td><td>FastAPI node: <code>/health</code>, <code>/api/studies</code>, <code>/api/studies/{id}</code>. Loads one JSON file based on <code>HOSPITAL_NODE</code> env var.</td><td>Complete (65 lines) — do not modify per hackathon rules</td></tr>
+<tr><td><code>models.py</code></td><td>Pydantic <code>StudyRecord</code> schema — 12 string fields incl. PII (name, DOB) and a full radiology report in <code>Diagnosis</code>.</td><td>Complete</td></tr>
+<tr><td><code>data/*.json</code></td><td>3 × 900 synthetic studies (300 brain / 300 heart / 300 fetal each). BCH = pediatric (0–21), MGH = adults (22–85), BWH = adults (18–75). Conditions overlap across hospitals.</td><td>Complete</td></tr>
+<tr><td><code>README.md</code></td><td>Challenge description, API reference, data schema.</td><td>Complete</td></tr>
+<tr><td><code>PRE_HACK_SETUP.md</code></td><td>Environment setup guide (Python, Git, venv).</td><td>Complete</td></tr>
+<tr><td><code>requirements.txt</code></td><td>fastapi, uvicorn, pydantic.</td><td>Complete</td></tr>
+</table>
+
+<div class="warn">
+<strong>Note:</strong> The README's architecture section references a <code>scripts/generate_data.py</code> folder that is
+<strong>not actually present</strong> in the repo — harmless (it was the organizers' data generator), but be aware the tree
+diagram doesn't match the actual contents.
+</div>
+
+<h2>3. Gap Analysis — What Needs to Be Done</h2>
+<p>The boilerplate's intentional deficiencies define your work items directly:</p>
+<table>
+<tr><th>Deficiency (by design)</th><th>What you must build</th></tr>
+<tr><td>No search endpoint — only "return all 900 records"</td><td>Search &amp; filter engine: free-text over <code>Diagnosis</code>, plus structured filters (age, sex, modality, body part, date range)</td></tr>
+<tr><td>Nodes are unaware of each other</td><td>Federated aggregator that fans out queries to all three nodes in parallel and merges results</td></tr>
+<tr><td>Zero authentication</td><td>Auth layer (login + roles), e.g. JWT with clinician / researcher / admin roles</td></tr>
+<tr><td>PII fully exposed (names, birthdates)</td><td>Redaction / de-identification layer applied per role before results leave the aggregator</td></tr>
+<tr><td>No audit trail</td><td>Access log: who searched what, when, and which records were returned</td></tr>
+<tr><td>No UI</td><td>Search front end (simple web page is enough) for the demo</td></tr>
+</table>
+
+<div class="pagebreak"></div>
+
+<h2>4. Proposed Architecture</h2>
+<pre><code>┌───────────────────────────────────────────────────────┐
+│                    Web UI  (:3000)                    │
+│   login → search box + filters → results table        │
+└──────────────────────────┬────────────────────────────┘
+                           │  JWT on every request
+┌──────────────────────────▼────────────────────────────┐
+│              AGGREGATOR — FastAPI (:8000)             │
+│                                                       │
+│  /auth/login      issue JWT (role: clinician /        │
+│                   researcher / admin)                 │
+│  /api/search      q, age_min/max, sex, modality,      │
+│                   body_part, date range, hospitals    │
+│                                                       │
+│  1. Auth middleware (verify JWT, extract role)        │
+│  2. Fan-out: async httpx GET /api/studies × 3 nodes   │
+│     (cache per node, refresh on TTL)                  │
+│  3. Filter + rank results                             │
+│  4. Redact per role  (name/DOB masked or dropped)     │
+│  5. Audit log (SQLite or JSONL)                       │
+└─────────┬──────────────────┬──────────────────┬───────┘
+          │                  │                  │
+   BCH :8001           MGH :8002          BWH :8003
+   (untouched boilerplate — treat as legacy systems)
+</code></pre>
+
+<h3>Key design decisions</h3>
+<ul>
+  <li><strong>Don't touch the nodes.</strong> Treat them as immutable legacy systems — that is the spirit of the challenge and impresses judges more than hacking the boilerplate.</li>
+  <li><strong>Fetch-and-cache, filter in the aggregator.</strong> The nodes only offer "give me everything" (2,700 records total, tiny). Pull all studies with <code>httpx.AsyncClient</code> + <code>asyncio.gather</code>, cache in memory with a short TTL, and run search locally. Graceful degradation: if one node is down, return results from the other two with a per-node status flag.</li>
+  <li><strong>Role-based redaction matrix</strong> (see Section 5). Redaction happens in one place — a single <code>redact(record, role)</code> function — so it is easy to demo and audit.</li>
+  <li><strong>Age handling:</strong> <code>PatientAge</code> comes as <code>007Y</code> / <code>011M</code> / <code>005D</code>. Normalize to a float in years at ingest so age-range filters work across pediatric and adult data.</li>
+</ul>
+
+<h2>5. Privacy / Redaction Design</h2>
+<table>
+<tr><th>Field</th><th>Admin</th><th>Clinician</th><th>Researcher</th></tr>
+<tr><td>PatientName</td><td>full</td><td>full</td><td><strong>REDACTED</strong></td></tr>
+<tr><td>PatientID</td><td>full</td><td>full</td><td>salted hash (consistent pseudonym)</td></tr>
+<tr><td>PatientBirthDate</td><td>full</td><td>year only</td><td><strong>REDACTED</strong> (keep PatientAge)</td></tr>
+<tr><td>PatientAge / Sex</td><td>full</td><td>full</td><td>full (needed for research)</td></tr>
+<tr><td>StudyInstanceUID</td><td>full</td><td>full</td><td>hashed</td></tr>
+<tr><td>Diagnosis</td><td>full</td><td>full</td><td>full (synthetic text contains no names)</td></tr>
+</table>
+<p>
+Stretch: run a lightweight PII scrubber (regex for <code>LastName^FirstName</code> patterns, dates) over
+<code>Diagnosis</code> text as defense-in-depth, and mention HIPAA Safe Harbor's 18 identifiers in the pitch —
+judges at healthcare hackathons reward teams that name the actual compliance standard.
+</p>
+
+<div class="pagebreak"></div>
+
+<h2>6. Prioritized Task List</h2>
+<table>
+<tr><th>#</th><th>Priority</th><th>Task</th><th>Est.</th></tr>
+<tr><td>1</td><td><span class="tag p0">P0</span></td><td>Scaffold aggregator (<code>aggregator/main.py</code>), async fan-out to 3 nodes with <code>httpx</code>, merge into one list with <code>hospital</code> source tag</td><td>1–1.5 h</td></tr>
+<tr><td>2</td><td><span class="tag p0">P0</span></td><td><code>/api/search</code>: free-text match over Diagnosis + filters (age range via normalized age, sex, modality, body_part, hospital, date range), pagination</td><td>1.5 h</td></tr>
+<tr><td>3</td><td><span class="tag p0">P0</span></td><td>JWT auth: <code>/auth/login</code> with 3 hardcoded demo users (one per role), auth dependency on all search routes</td><td>1 h</td></tr>
+<tr><td>4</td><td><span class="tag p0">P0</span></td><td>Role-based redaction function per matrix in Section 5</td><td>45 min</td></tr>
+<tr><td>5</td><td><span class="tag p1">P1</span></td><td>Web UI: login page + search page (results table showing hospital badge, redaction visibly different per role). Plain HTML/JS or React — plain is faster</td><td>2 h</td></tr>
+<tr><td>6</td><td><span class="tag p1">P1</span></td><td>Audit log (SQLite/JSONL): user, role, query, timestamp, result count + <code>/api/audit</code> viewer for admin role</td><td>45 min</td></tr>
+<tr><td>7</td><td><span class="tag p1">P1</span></td><td>Resilience: per-node timeout, "2 of 3 hospitals responded" status in response envelope; demo by killing one node live</td><td>30 min</td></tr>
+<tr><td>8</td><td><span class="tag p2">P2</span></td><td>Relevance ranking (term frequency in Diagnosis) + result highlighting</td><td>45 min</td></tr>
+<tr><td>9</td><td><span class="tag p2">P2</span></td><td>Aggregate analytics endpoint: counts by condition/hospital/age-band with k-anonymity floor (suppress buckets &lt; 5) — great judge bait</td><td>1 h</td></tr>
+<tr><td>10</td><td><span class="tag p2">P2</span></td><td>Diagnosis-text PII scrubber (regex defense-in-depth)</td><td>30 min</td></tr>
+<tr><td>11</td><td><span class="tag p3">P3</span></td><td>Semantic search over Diagnosis (embeddings, e.g. sentence-transformers or an API) — only if time remains</td><td>2 h+</td></tr>
+<tr><td>12</td><td><span class="tag p3">P3</span></td><td>Repo hygiene: update README with solution architecture, add <code>run_all.ps1</code>/<code>run_all.sh</code> to launch 3 nodes + aggregator + UI in one command</td><td>30 min</td></tr>
+</table>
+
+<p><strong>MVP = tasks 1–4</strong> (about half a day): a secured, role-aware federated search API demonstrable with curl/Swagger.
+Tasks 5–7 make it demo-ready. Tasks 8–10 differentiate you from other teams.</p>
+
+<h2>7. Suggested Repo Layout for the Solution</h2>
+<pre><code>DataAcrossBorders/
+├── main.py, models.py, data/        # boilerplate nodes (unchanged)
+├── aggregator/
+│   ├── main.py                      # FastAPI app :8000
+│   ├── auth.py                      # JWT issue/verify, demo users, roles
+│   ├── federation.py                # async fan-out + cache + node health
+│   ├── search.py                    # filters, text match, age normalization
+│   ├── redaction.py                 # redact(record, role)
+│   └── audit.py                     # audit log write/read
+├── ui/                              # static HTML/JS or small React app
+├── run_all.ps1                      # start nodes 8001-8003 + aggregator + UI
+└── requirements.txt                 # + httpx, python-jose, passlib
+</code></pre>
+
+<h2>8. Demo Script (for judging)</h2>
+<ol>
+  <li>Show a raw node: <code>curl :8001/api/studies</code> → point out exposed names/birthdates and no auth. "This is healthcare data today."</li>
+  <li>Log in as <strong>researcher</strong>, search "hydrocephalus" → results from all 3 hospitals, PII redacted, pseudonymized IDs.</li>
+  <li>Log in as <strong>clinician</strong>, same search → names visible, birthdate reduced to year. Same data, different lens.</li>
+  <li>Kill the MGH node mid-demo → search still returns BCH+BWH with a degraded-status banner. Resilience.</li>
+  <li>As <strong>admin</strong>, open the audit log → every query above is recorded.</li>
+  <li>Close with the analytics endpoint (condition counts across hospitals, small buckets suppressed) → "research insight without ever moving or exposing patient data."</li>
+</ol>
+
+<h2>9. Setup on Your Laptop (Windows 11 + conda)</h2>
+<p>You already have conda, so skip the venv instructions in <code>PRE_HACK_SETUP.md</code> and use this instead. Run everything from PowerShell.</p>
+
+<h3>One-time setup</h3>
+<pre><code># 1. Create and activate a dedicated env (Python 3.11)
+conda create -n borders python=3.11 -y
+conda activate borders
+
+# 2. Install dependencies
+cd C:\Users\test\Projects\DataAcrossBorders
+pip install -r requirements.txt
+
+# 3. Extra packages you'll need for the aggregator (Section 6)
+pip install httpx "python-jose[cryptography]" "passlib[bcrypt]"</code></pre>
+
+<h3>Running the three hospital nodes (three PowerShell windows)</h3>
+<pre><code># Window 1 — Boston Children's
+conda activate borders; cd C:\Users\test\Projects\DataAcrossBorders
+$env:HOSPITAL_NODE="BCH"; uvicorn main:app --port 8001 --reload
+
+# Window 2 — Mass General
+conda activate borders; cd C:\Users\test\Projects\DataAcrossBorders
+$env:HOSPITAL_NODE="MGH"; uvicorn main:app --port 8002 --reload
+
+# Window 3 — Brigham and Women's
+conda activate borders; cd C:\Users\test\Projects\DataAcrossBorders
+$env:HOSPITAL_NODE="BWH"; uvicorn main:app --port 8003 --reload</code></pre>
+
+<h3>Verify</h3>
+<pre><code>curl.exe http://localhost:8001/health   # {"status":"healthy","node":"BCH"}
+curl.exe http://localhost:8002/health   # MGH
+curl.exe http://localhost:8003/health   # BWH</code></pre>
+<p>
+Note: in PowerShell use <code>curl.exe</code> (plain <code>curl</code> is an alias for <code>Invoke-WebRequest</code>).
+Interactive docs live at <code>http://localhost:8001/docs</code> (and 8002/8003). Once the aggregator exists it runs the
+same way on port 8000: <code>uvicorn aggregator.main:app --port 8000 --reload</code>. Task 12's <code>run_all.ps1</code>
+launches all of this in one command — write it early, it pays off every restart.
+</p>
+
+<h2>10. Risks &amp; Gotchas</h2>
+<ul>
+  <li><code>PatientAge</code> mixed units (<code>Y</code>/<code>M</code>/<code>D</code>) will silently break naive age filters — normalize first (BCH has neonates like <code>005D</code>).</li>
+  <li><code>PatientName</code> includes non-name values like <code>Smith^BabyBoy</code> — fine, but don't build name parsing that assumes real first names.</li>
+  <li>Windows: env var syntax for the nodes differs (<code>$env:HOSPITAL_NODE="BCH"</code> in PowerShell); put it in <code>run_all.ps1</code> so it never bites during the demo.</li>
+  <li>The aggregator must not double-count: StudyIDs are unique per node but the same <em>prefix scheme</em> (<code>BR-</code>, etc.) appears across hospitals — always key on <code>(hospital, StudyID)</code>.</li>
+  <li>Nodes allow CORS <code>*</code>, but the UI should still talk only to the aggregator — going straight to nodes from the browser would bypass your entire privacy layer (worth stating out loud to judges).</li>
+</ul>
+
+<div class="footer-note">
+DataAcrossBorders — analysis generated July 25, 2026. Source: repository inspection of iknalos/DataAcrossBorders
+(8 files, single commit). Est. total effort: MVP ~4.5 h, full demo build ~8–9 h.
+</div>
+
+</body>
+</html>

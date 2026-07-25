@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DataAcrossBorders — Federated Medical Imaging Search</title>
+<style>
+  :root { --navy:#0b3d66; --blue:#2874a6; --bg:#f4f7fa; --line:#d4dce4; }
+  * { box-sizing:border-box; }
+  body { font-family:"Segoe UI",Arial,sans-serif; margin:0; background:var(--bg); color:#1a2332; }
+  header { background:var(--navy); color:#fff; padding:14px 24px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  header h1 { font-size:18px; margin:0; }
+  header .sub { font-size:12px; opacity:.75; }
+  #who { margin-left:auto; font-size:13px; }
+  .rolebadge { padding:2px 10px; border-radius:10px; font-weight:600; font-size:11px; }
+  .r-clinician { background:#3d8b40; } .r-researcher { background:#d9822b; } .r-admin { background:#c0392b; }
+  main { max-width:1100px; margin:20px auto; padding:0 16px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px 20px; margin-bottom:16px; }
+  .banner { background:#fbeaea; border-left:4px solid #c0392b; padding:10px 14px; border-radius:0 6px 6px 0; margin-bottom:16px; display:none; }
+  button { background:var(--blue); color:#fff; border:0; border-radius:6px; padding:8px 14px; cursor:pointer; font-size:13px; }
+  button.ghost { background:#fff; color:var(--blue); border:1px solid var(--blue); }
+  button:hover { filter:brightness(1.1); }
+  input, select { padding:7px 9px; border:1px solid var(--line); border-radius:6px; font-size:13px; }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .filters input[type=text] { flex:1; min-width:220px; }
+  .tabs { display:flex; gap:6px; margin-bottom:12px; }
+  .tabs button { background:#fff; color:#5a6a7a; border:1px solid var(--line); }
+  .tabs button.active { background:var(--navy); color:#fff; border-color:var(--navy); }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; margin-top:10px; }
+  th { background:var(--navy); color:#fff; text-align:left; padding:6px 8px; position:sticky; top:0; }
+  td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; }
+  tr:nth-child(even) td { background:var(--bg); }
+  .hosp { font-weight:700; padding:1px 7px; border-radius:8px; color:#fff; font-size:11px; }
+  .h-BCH { background:#7d3c98; } .h-MGH { background:#2874a6; } .h-BWH { background:#1e8449; }
+  .pseud { font-family:Consolas,monospace; font-size:11px; color:#8a97a5; }
+  .counts { display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; }
+  .count { background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:12px 18px; text-align:center; min-width:110px; }
+  .count b { display:block; font-size:26px; color:var(--navy); }
+  .diag { max-width:420px; }
+  .diag .more { color:var(--blue); cursor:pointer; font-size:11px; }
+  .muted { color:#8a97a5; font-size:12px; }
+  #login .demo { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>DataAcrossBorders</h1><div class="sub">Federated medical imaging search — BCH · MGH · BWH</div></div>
+  <div id="who"></div>
+</header>
+<main>
+  <div class="banner" id="banner">
+    <b>Aggregator not reachable at <span id="apiurl-label"></span>.</b>
+    Start it locally: <code>uvicorn app:app --port 8000</code> in <code>solution/</code>
+    (see the <a href="https://github.com/iknalos/DataAcrossBorders">repo</a>).
+  </div>
+
+  <div class="card" id="login">
+    <h3 style="margin-top:0">Sign in</h3>
+    <div class="filters">
+      <input type="text" id="u" placeholder="username" style="max-width:160px">
+      <input type="password" id="p" placeholder="password" style="max-width:160px">
+      <button onclick="login()">Sign in</button>
+    </div>
+    <div class="demo muted">
+      Demo users (password <code>demo123</code>):
+      <button class="ghost" onclick="quick('dr.chen')">dr.chen — clinician</button>
+      <button class="ghost" onclick="quick('res.kim')">res.kim — researcher</button>
+      <button class="ghost" onclick="quick('admin')">admin</button>
+    </div>
+  </div>
+
+  <div id="appui" style="display:none">
+    <div class="tabs">
+      <button id="tab-discover" class="active" onclick="setTab('discover')">1 · Discover (counts only)</button>
+      <button id="tab-search" onclick="setTab('search')">2 · Record search (redacted)</button>
+      <button id="tab-audit" onclick="setTab('audit')" style="display:none">Audit log</button>
+    </div>
+    <div class="card">
+      <div class="filters" id="filterbar">
+        <input type="text" id="q" placeholder='Free-text over diagnosis, e.g. "hydrocephalus" or "ischemic infarct"'>
+        <select id="body_part"><option value="">Body part</option><option>BRAIN</option><option>HEART</option><option>FETAL</option></select>
+        <select id="sex"><option value="">Sex</option><option>M</option><option>F</option></select>
+        <input type="number" id="age_min" placeholder="Age ≥" style="width:80px">
+        <input type="number" id="age_max" placeholder="Age ≤" style="width:80px">
+        <select id="hospital"><option value="">All hospitals</option><option>BCH</option><option>MGH</option><option>BWH</option></select>
+        <button onclick="run()">Search federation</button>
+      </div>
+      <div id="out"></div>
+    </div>
+  </div>
+</main>
+<script>
+const API = localStorage.getItem("dab_api") || "http://localhost:8000";
+document.getElementById("apiurl-label").textContent = API;
+let TOKEN = null, ROLE = null, TAB = "discover";
+
+function quick(u){ document.getElementById("u").value = u; document.getElementById("p").value = "demo123"; login(); }
+
+async function api(path, opts={}){
+  const headers = Object.assign({"Content-Type":"application/json"}, opts.headers||{});
+  if (TOKEN) headers["Authorization"] = "Bearer " + TOKEN;
+  let r;
+  try { r = await fetch(API + path, Object.assign({}, opts, {headers})); }
+  catch(e){ document.getElementById("banner").style.display = "block"; throw e; }
+  document.getElementById("banner").style.display = "none";
+  if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+  return r.json();
+}
+
+async function login(){
+  const u = document.getElementById("u").value, p = document.getElementById("p").value;
+  try {
+    const d = await api("/auth/login", {method:"POST", body: JSON.stringify({username:u, password:p})});
+    TOKEN = d.access_token; ROLE = d.role;
+    document.getElementById("who").innerHTML =
+      `${d.display} &nbsp;<span class="rolebadge r-${d.role}">${d.role.toUpperCase()}</span>`;
+    document.getElementById("login").style.display = "none";
+    document.getElementById("appui").style.display = "block";
+    document.getElementById("tab-audit").style.display = d.role === "admin" ? "inline-block" : "none";
+    run();
+  } catch(e){ alert("Login failed: " + e.message); }
+}
+
+function setTab(t){
+  TAB = t;
+  for (const x of ["discover","search","audit"])
+    document.getElementById("tab-"+x).classList.toggle("active", x===t);
+  document.getElementById("filterbar").style.display = t === "audit" ? "none" : "flex";
+  run();
+}
+
+function params(){
+  const p = new URLSearchParams();
+  for (const id of ["q","body_part","sex","age_min","age_max","hospital"]) {
+    const v = document.getElementById(id).value.trim();
+    if (v) p.set(id, v);
+  }
+  return p.toString() ? "?" + p.toString() : "";
+}
+
+async function run(){
+  const out = document.getElementById("out");
+  out.innerHTML = '<p class="muted">Querying federation…</p>';
+  try {
+    if (TAB === "discover") {
+      const d = await api("/api/discover" + params());
+      let h = `<div class="counts"><div class="count"><b>${d.total_matches}</b>total matches</div>`;
+      for (const [hosp, n] of Object.entries(d.by_hospital))
+        h += `<div class="count"><b>${n}</b><span class="hosp h-${hosp}">${hosp}</span></div>`;
+      h += `</div><h4>By age band <span class="muted">(counts &lt; ${d.k_anonymity_floor} suppressed — k-anonymity)</span></h4><div class="counts">`;
+      for (const [band, n] of Object.entries(d.by_age_band))
+        h += `<div class="count"><b>${n}</b>${band} yrs</div>`;
+      out.innerHTML = h + "</div><p class='muted'>Tier 1 exposes existence and volume only — no records, no PII, for any role.</p>";
+    } else if (TAB === "search") {
+      const d = await api("/api/search" + params());
+      let h = `<p class="muted">${d.total_matches} matches — showing ${d.returned} (role: <b>${d.role}</b>)</p>
+        <table><tr><th>Hospital</th><th>Study</th><th>Patient</th><th>Age</th><th>Sex</th><th>Date</th><th>Part</th><th>Diagnosis</th></tr>`;
+      for (const r of d.results) {
+        const p = r.patient;
+        const pat = p.name
+          ? `<b>${p.name}</b><br><span class="muted">${p.patient_id} · ${p.birth_date ? "DOB " + p.birth_date : "b. " + p.birth_year}</span>`
+          : `<span class="pseud">${p.pseudonym}</span><br><span class="muted">pseudonym</span>`;
+        h += `<tr><td><span class="hosp h-${r.hospital}">${r.hospital}</span></td><td>${r.study_id}</td>
+          <td>${pat}</td><td>${r.age_years}</td><td>${r.sex}</td><td>${r.study_date}</td>
+          <td>${r.body_part}</td><td class="diag">${snippet(r.diagnosis)}</td></tr>`;
+      }
+      out.innerHTML = h + "</table>";
+    } else {
+      const d = await api("/api/audit");
+      let h = `<table><tr><th>Time (UTC)</th><th>User</th><th>Role</th><th>Endpoint</th><th>Query</th><th>Results</th></tr>`;
+      for (const e of d.entries)
+        h += `<tr><td>${e.ts_utc}</td><td>${e.username}</td><td>${e.role}</td><td>${e.endpoint}</td>
+              <td><code style="font-size:11px">${e.params_json}</code></td><td>${e.result_count}</td></tr>`;
+      out.innerHTML = h + "</table>";
+    }
+  } catch(e){ out.innerHTML = `<p style="color:#c0392b">Error: ${e.message}</p>`; }
+}
+
+function snippet(t){
+  const short = t.length > 220 ? t.slice(0, 220) + "…" : t;
+  return `<span title="${t.replace(/"/g,"&quot;")}">${short}</span>`;
+}
+</script>
+</body>
+</html>

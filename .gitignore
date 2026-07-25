@@ -1,0 +1,5 @@
+# Databases are per-machine ETL output — never commit patient data, even synthetic
+solution/*.db
+__pycache__/
+*.pyc
+venv/
