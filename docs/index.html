@@ -134,7 +134,7 @@
         <input type="number" id="age_min" placeholder="Age ≥" style="width:80px">
         <input type="number" id="age_max" placeholder="Age ≤" style="width:80px">
         <select id="hospital"><option value="">All hospitals</option><option>BCH</option><option>MGH</option><option>BWH</option></select>
-        <button onclick="run()">Search federation</button>
+        <button onclick="newSearch()">Search federation</button>
         <button class="ghost" id="csvbtn" onclick="exportCsv()" style="display:none">Export CSV</button>
       </div>
       <div class="filters" id="findingbar" style="margin-top:8px">
@@ -157,6 +157,7 @@
 const API = localStorage.getItem("dab_api") || "http://localhost:8000";
 let USE_DEMO = true;   // decided by initBackend(): real API if reachable, else in-browser demo
 let TOKEN = null, ROLE = null, TAB = "discover", CHOSEN = null;
+let SEARCH_OFFSET = 0; const PAGE = 50;   // record-search pagination
 
 // Probe for a live backend once at startup; fall back to the client-side demo engine.
 // ?demo=1 forces demo mode (for a guaranteed-shareable link); ?api=URL points at a backend.
@@ -261,7 +262,11 @@ function setTabState(t){
   document.getElementById("csvbtn").style.display = t === "search" ? "inline-block" : "none";
 }
 
-function setTab(t){ setTabState(t); run(); }
+function setTab(t){ if (t === "search") SEARCH_OFFSET = 0; setTabState(t); run(); }
+
+// Fresh search from the button resets to page 1; Prev/Next just move the window.
+function newSearch(){ SEARCH_OFFSET = 0; run(); }
+function pageSearch(delta){ SEARCH_OFFSET = Math.max(0, SEARCH_OFFSET + delta * PAGE); run(); }
 
 async function exportCsv(){
   const p = new URLSearchParams(params().slice(1));
@@ -306,9 +311,12 @@ async function run(){
         h += `<div class="count"><b>${n}</b>${band} yrs</div>`;
       out.innerHTML = h + "</div><p class='muted'>Tier 1 exposes existence and volume only — no records, no PII, for any role. Suppressed cells cannot be recovered by subtraction.</p>";
     } else if (TAB === "search") {
-      const d = await api("/api/search" + params());
+      const pq = params();
+      const d = await api("/api/search" + (pq ? pq + "&" : "?") + `limit=${PAGE}&offset=${SEARCH_OFFSET}`);
+      const total = typeof d.total_matches === "number" ? d.total_matches : 0;
+      const from = total ? SEARCH_OFFSET + 1 : 0, to = SEARCH_OFFSET + d.returned;
       let h = expandedNote(d.expanded_terms);
-      h += `<p class="muted">${d.total_matches} matches — showing ${d.returned}, ranked by relevance (role: <b>${d.role}</b>)</p>
+      h += `<p class="muted">${total} matches — showing ${from}–${to}, ranked by relevance (role: <b>${d.role}</b>)</p>
         <table><tr><th>Hospital</th><th>Study</th><th>Patient</th><th>Age</th><th>Sex</th><th>Date</th><th>Part</th><th>Diagnosis</th></tr>`;
       for (const r of d.results) {
         const p = r.patient;
@@ -320,7 +328,13 @@ async function run(){
           <td>${r.body_part}${r.category?`<br><span class="muted small">${r.category}</span>`:""}</td>
           <td class="diag">${snippet(r.diagnosis)}${findingChips(r.findings)}</td></tr>`;
       }
-      out.innerHTML = h + "</table>";
+      h += "</table>";
+      const hasPrev = SEARCH_OFFSET > 0, hasNext = to < total;
+      h += `<div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+        <button ${hasPrev?"":"disabled"} onclick="pageSearch(-1)">&larr; Prev ${PAGE}</button>
+        <button ${hasNext?"":"disabled"} onclick="pageSearch(1)">Next ${PAGE} &rarr;</button>
+        <span class="muted small">page ${Math.floor(SEARCH_OFFSET/PAGE)+1} of ${Math.max(1, Math.ceil(total/PAGE))}</span></div>`;
+      out.innerHTML = h;
     } else if (TAB === "audit") {
       const d = await api("/api/audit");
       let h = `<table><tr><th>Time (UTC)</th><th>User</th><th>Role</th><th>Endpoint</th><th>Query</th><th>Results</th><th>Flags</th></tr>`;
