@@ -41,7 +41,26 @@
   .diag { max-width:420px; }
   .diag .more { color:var(--blue); cursor:pointer; font-size:11px; }
   .muted { color:#8a97a5; font-size:12px; }
-  #login .demo { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+  .gatewrap { display:flex; justify-content:center; padding:48px 16px; }
+  .gatecard { background:#fff; border:1px solid var(--line); border-radius:14px; padding:34px 38px;
+              max-width:760px; width:100%; box-shadow:0 10px 34px rgba(11,61,102,.13); text-align:center; }
+  .gatehead h2 { color:var(--navy); margin:0 0 4px; font-size:24px; }
+  .gatehead p { color:#8a97a5; margin:0; font-size:13px; }
+  .roleprompt { color:#5a6a7a; font-size:14px; margin:24px 0 6px; }
+  .rolecards { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin:16px 0 10px; }
+  .rolecard { border:1px solid var(--line); border-radius:10px; padding:20px 14px; cursor:pointer;
+              transition:all .15s ease; background:#fff; }
+  .rolecard:hover { border-color:var(--blue); box-shadow:0 4px 16px rgba(40,116,166,.2); transform:translateY(-2px); }
+  .rolecard .ico { font-size:30px; }
+  .rolecard b { display:block; margin:10px 0 6px; color:var(--navy); font-size:15px; }
+  .rolecard span { font-size:12px; color:#5a6a7a; line-height:1.45; }
+  .back { color:var(--blue); cursor:pointer; font-size:13px; display:inline-block; margin-bottom:10px; }
+  .back:hover { text-decoration:underline; }
+  .loginform { display:flex; flex-direction:column; gap:10px; max-width:280px; margin:14px auto 0; }
+  .loginform input { padding:10px 12px; font-size:14px; }
+  .loginform button { padding:10px; font-size:14px; }
+  .demoline { margin-top:16px; }
+  .small { font-size:11px; }
 </style>
 </head>
 <body>
@@ -56,18 +75,44 @@
     (see the <a href="https://github.com/iknalos/DataAcrossBorders">repo</a>).
   </div>
 
-  <div class="card" id="login">
-    <h3 style="margin-top:0">Sign in</h3>
-    <div class="filters">
-      <input type="text" id="u" placeholder="username" style="max-width:160px">
-      <input type="password" id="p" placeholder="password" style="max-width:160px">
-      <button onclick="login()">Sign in</button>
+  <div class="gatewrap" id="gate">
+    <div class="gatecard">
+      <div class="gatehead">
+        <h2>Federated Imaging Search</h2>
+        <p>Boston Children's Hospital · Massachusetts General Hospital · Brigham and Women's Hospital</p>
+      </div>
+      <p class="roleprompt">Select your access role to continue</p>
+      <div class="rolecards">
+        <div class="rolecard" onclick="pickRole('clinician')">
+          <div class="ico">🩺</div><b>Clinician</b>
+          <span>Patient-identified view for direct care. Patient name and birth year visible.</span>
+        </div>
+        <div class="rolecard" onclick="pickRole('researcher')">
+          <div class="ico">🔬</div><b>Researcher</b>
+          <span>De-identified cohort view. Pseudonyms only — PII never leaves the vault.</span>
+        </div>
+        <div class="rolecard" onclick="pickRole('admin')">
+          <div class="ico">🛡️</div><b>Administrator</b>
+          <span>Full record access plus the federation-wide query audit log.</span>
+        </div>
+      </div>
+      <p class="muted small">Your role is verified server-side at sign-in — this selection only routes you to the right portal.</p>
     </div>
-    <div class="demo muted">
-      Demo users (password <code>demo123</code>):
-      <button class="ghost" onclick="quick('dr.chen')">dr.chen — clinician</button>
-      <button class="ghost" onclick="quick('res.kim')">res.kim — researcher</button>
-      <button class="ghost" onclick="quick('admin')">admin</button>
+  </div>
+
+  <div class="gatewrap" id="login" style="display:none">
+    <div class="gatecard" style="max-width:420px">
+      <a class="back" onclick="backToRoles()">&larr; choose a different role</a>
+      <h3 id="loginTitle" style="margin:4px 0 0; color:var(--navy)">Sign in</h3>
+      <form class="loginform" onsubmit="login(); return false;">
+        <input type="text" id="u" placeholder="Username" autocomplete="username">
+        <input type="password" id="p" placeholder="Password" autocomplete="current-password">
+        <button type="submit">Sign in</button>
+      </form>
+      <div class="demoline muted">
+        Demo account: <code id="demoUser">dr.chen</code> / <code>demo123</code>
+        &nbsp;<button class="ghost" type="button" onclick="fillDemo()">Use demo account</button>
+      </div>
     </div>
   </div>
 
@@ -95,9 +140,33 @@
 <script>
 const API = localStorage.getItem("dab_api") || "http://localhost:8000";
 document.getElementById("apiurl-label").textContent = API;
-let TOKEN = null, ROLE = null, TAB = "discover";
+let TOKEN = null, ROLE = null, TAB = "discover", CHOSEN = null;
+const ROLE_META = {
+  clinician:  {title: "Clinician sign-in",     demo: "dr.chen"},
+  researcher: {title: "Researcher sign-in",    demo: "res.kim"},
+  admin:      {title: "Administrator sign-in", demo: "admin"},
+};
 
-function quick(u){ document.getElementById("u").value = u; document.getElementById("p").value = "demo123"; login(); }
+function pickRole(r){
+  CHOSEN = r;
+  document.getElementById("loginTitle").textContent = ROLE_META[r].title;
+  document.getElementById("demoUser").textContent = ROLE_META[r].demo;
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("login").style.display = "flex";
+  document.getElementById("u").focus();
+}
+
+function backToRoles(){
+  document.getElementById("login").style.display = "none";
+  document.getElementById("gate").style.display = "flex";
+  document.getElementById("u").value = ""; document.getElementById("p").value = "";
+}
+
+function fillDemo(){
+  document.getElementById("u").value = ROLE_META[CHOSEN].demo;
+  document.getElementById("p").value = "demo123";
+  login();
+}
 
 async function api(path, opts={}){
   const headers = Object.assign({"Content-Type":"application/json"}, opts.headers||{});
@@ -115,6 +184,8 @@ async function login(){
   try {
     const d = await api("/auth/login", {method:"POST", body: JSON.stringify({username:u, password:p})});
     TOKEN = d.access_token; ROLE = d.role;
+    if (CHOSEN && d.role !== CHOSEN)
+      alert(`Note: this account's verified role is "${d.role}" — access is set by the account, not the portal you picked.`);
     document.getElementById("who").innerHTML =
       `${d.display} <span class="rolebadge r-${d.role}">${d.role.toUpperCase()}</span>
        <button onclick="logout()">Log out</button>`;
@@ -126,12 +197,13 @@ async function login(){
 }
 
 function logout(){
-  TOKEN = null; ROLE = null;
+  TOKEN = null; ROLE = null; CHOSEN = null;
   document.getElementById("who").innerHTML = "";
   document.getElementById("appui").style.display = "none";
-  document.getElementById("login").style.display = "block";
   document.getElementById("out").innerHTML = "";
-  document.getElementById("p").value = "";
+  document.getElementById("u").value = ""; document.getElementById("p").value = "";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("gate").style.display = "flex";
   setTabState("discover");
 }
 
